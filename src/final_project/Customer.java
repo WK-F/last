@@ -27,10 +27,12 @@ public class Customer extends javax.swing.JFrame {
 
     public Customer() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     public Customer(String w) {
         initComponents();
+        this.setLocationRelativeTo(null);
         jTextField2.setText(w);
     }
 

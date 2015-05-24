@@ -17,6 +17,7 @@ public class TempFisrtPage extends javax.swing.JFrame {
      */
     public TempFisrtPage() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

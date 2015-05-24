@@ -41,6 +41,7 @@ public class Bill extends javax.swing.JFrame {
 
     public Bill(String orderString) {
         initComponents();
+        this.setLocationRelativeTo(null);
         jTextField1.setText(orderString);
         searchByOno();
 
@@ -48,6 +49,7 @@ public class Bill extends javax.swing.JFrame {
 
     public Bill() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

@@ -41,6 +41,7 @@ public class Employee extends javax.swing.JFrame {
     public Employee() {
         try {
             initComponents();
+            this.setLocationRelativeTo(null);
             noImg();
         } catch (Exception ex) {
             Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);

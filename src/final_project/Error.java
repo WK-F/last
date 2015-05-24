@@ -20,6 +20,7 @@ public class Error extends javax.swing.JFrame {
         
         
         initComponents();
+        this.setLocationRelativeTo(null);
         jmsg.setText(x);
         this.setVisible(true);
     }

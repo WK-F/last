@@ -3,8 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package final_project;
+
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,9 +22,11 @@ public class Materials extends javax.swing.JFrame {
      */
     public Materials() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
- int xMouse;
+    int xMouse;
     int yMouse;
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,6 +55,8 @@ public class Materials extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jComboBox2 = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -108,6 +117,12 @@ public class Materials extends javax.swing.JFrame {
         jLabel9.setText("Limit");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, -1, -1));
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 120, 30));
+
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField2KeyReleased(evt);
+            }
+        });
         getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 120, 30));
 
         jTextArea1.setColumns(20);
@@ -119,6 +134,11 @@ public class Materials extends javax.swing.JFrame {
         getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, 120, 30));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Screen", "Cloths", "Paint", "Other" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 120, 30));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -127,6 +147,11 @@ public class Materials extends javax.swing.JFrame {
         jButton1.setText("Delete");
         jButton1.setContentAreaFilled(false);
         jButton1.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/delete 2.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 480, -1, 30));
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -135,6 +160,11 @@ public class Materials extends javax.swing.JFrame {
         jButton2.setText("Save");
         jButton2.setContentAreaFilled(false);
         jButton2.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/save 2.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 480, -1, 30));
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -143,6 +173,11 @@ public class Materials extends javax.swing.JFrame {
         jButton3.setText("Update");
         jButton3.setContentAreaFilled(false);
         jButton3.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/update 2.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 480, -1, 30));
 
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -151,7 +186,28 @@ public class Materials extends javax.swing.JFrame {
         jButton4.setText("Clear");
         jButton4.setContentAreaFilled(false);
         jButton4.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/clear2.png"))); // NOI18N
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 480, -1, 30));
+
+        jButton5.setText("jButton5");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 30, 30));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 120, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/BARIMG/materials.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 540));
@@ -174,6 +230,173 @@ public class Materials extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        cls();
+        try {
+            int ino = 70001;
+            String z = null;
+            int test = 0;
+            Statement st = javaConnect.ConnectorDB();
+            ResultSet rs = st.executeQuery("SELECT Item_Code FROM items ORDER BY Item_Code");
+            while (rs.next()) {
+                z = rs.getString("Item_Code");
+                test = 1;
+            }
+            if (test == 1) {
+                int a = Integer.parseInt(z);
+                a++;
+                z = Integer.toString(a);
+
+            } else {
+                z = Integer.toString(ino);
+            }
+            jTextField2.setText(z);
+
+        } catch (Exception e) {
+
+        }
+
+
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
+        try {
+            Statement st = javaConnect.ConnectorDB();
+            ResultSet r = st.executeQuery("SELECT Item_Code FROM items WHERE Item_Code LIKE '%" + jTextField2.getText() + "%'");
+            Vector v1 = new Vector();
+
+            while (r.next()) {
+                v1.add(r.getString("Item_Code"));
+
+            }
+
+            jComboBox2.setModel(new DefaultComboBoxModel(v1));
+            jComboBox2.setPopupVisible(true);
+            jTextField2.setText(jTextField2.getText());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }//GEN-LAST:event_jTextField2KeyReleased
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        jTextField2.setText(jComboBox2.getSelectedItem().toString());
+        try {
+            searchByItemCode();
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       
+        
+        insert();
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        cls();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+         update();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      String a = jTextField2.getText();
+        int dr = JOptionPane.showConfirmDialog(null, "Are You Sure You Want to Delete The Record?");
+        if (dr == JOptionPane.YES_OPTION) {
+
+            try {
+                Statement st = javaConnect.ConnectorDB();
+                st.executeUpdate("delete from items where Item_Code='" + a + "' ");
+                JOptionPane.showMessageDialog(this, "Material Deleted");
+                cls();
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    void searchByItemCode() throws Exception {
+        Statement st = javaConnect.ConnectorDB();
+        ResultSet rs = st.executeQuery("SELECT * FROM items WHERE Item_Code='" + jTextField2.getText() + "'");
+        if (rs.next()) {
+
+            // jTextField2.setText(rs.getString("NIC"));
+            String jcbs1 = rs.getString("Type");
+            jComboBox1.setSelectedItem(jcbs1);
+            jTextArea1.setText(rs.getString("Description"));
+            jTextField4.setText(rs.getString("Qty"));
+            jTextField5.setText(rs.getString("Unit_Price"));
+            jTextField1.setText(rs.getString("Unit_limit"));
+
+        }
+
+    }
+    
+    private void update() {
+        try {
+           String a, b, c, d, e, f;
+            a = jTextField2.getText();
+            b = (String) jComboBox1.getSelectedItem();
+            c=jTextArea1.getText();
+            d = jTextField4.getText();
+            e = jTextField5.getText();
+            f = jTextField1.getText();
+
+            int dr = JOptionPane.showConfirmDialog(null, "Are You Sure You Want to Replace The Record?");
+            if (dr == JOptionPane.YES_OPTION) {
+
+                Statement st = javaConnect.ConnectorDB();
+                st.executeUpdate("update items set Type='" + b + "',Description='" + c + "',Qty='" + d + "',Unit_Price='" + e + "',Unit_limit='" + f + "' where Item_Code='" + a + "'");
+                JOptionPane.showMessageDialog(null, "Record Updated");
+               cls();
+
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e);
+        }
+
+    }
+    
+    private void insert(){
+        try {
+            String a, b, c, d, e, f;
+            a = jTextField2.getText();
+            b = (String) jComboBox1.getSelectedItem();
+            c=jTextArea1.getText();
+            d = jTextField4.getText();
+            e = jTextField5.getText();
+            f = jTextField1.getText();
+
+            Statement st = javaConnect.ConnectorDB();
+            st.executeUpdate("insert into items values ('" + a + "','" + b + "','" + c + "','" + d + "','" + e + "','" + f + "')");
+            JOptionPane.showMessageDialog(this, "Matirial Added");
+            cls();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e);
+        }
+
+    }
+
+    void cls() {
+        jTextField2.setText("");
+        jTextArea1.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
+        jTextField1.setText("");
+
+    }
 
     /**
      * @param args the command line arguments
@@ -215,7 +438,9 @@ public class Materials extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

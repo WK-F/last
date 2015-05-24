@@ -25,6 +25,7 @@ public class MailTestFrame extends javax.swing.JFrame {
      */
     public MailTestFrame() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

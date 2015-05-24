@@ -39,6 +39,7 @@ public class Order extends javax.swing.JFrame {
      */
     public Order() {
         initComponents();
+        this.setLocationRelativeTo(null);
         try {
             noImg();
             jTextField2.setText("0");
