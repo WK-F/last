@@ -22,6 +22,7 @@ public class Status extends javax.swing.JFrame {
      */
     public Status() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
     public Status(String a) {
         initComponents();
