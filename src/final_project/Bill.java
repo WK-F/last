@@ -8,8 +8,8 @@ package final_project;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
-import java.io.FileOutputStream;
+import java.awt.Color;
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.DateFormat;
@@ -25,6 +25,14 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.report.builder.DynamicReports;
+import net.sf.dynamicreports.report.builder.column.Columns;
+import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.builder.component.FillerBuilder;
+import net.sf.dynamicreports.report.builder.component.ImageBuilder;
+import net.sf.dynamicreports.report.builder.style.StyleBuilder;
+import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 //import javax.swing.text.Element;
 
 /**
@@ -118,6 +126,9 @@ public class Bill extends javax.swing.JFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField1KeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
         });
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 220, 31));
 
@@ -199,6 +210,12 @@ public class Bill extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("+");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(263, 195, -1, -1));
+
+        jTextField7.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField7KeyTyped(evt);
+            }
+        });
         getContentPane().add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 100, 30));
 
         jTextField6.setEditable(false);
@@ -240,7 +257,7 @@ public class Bill extends javax.swing.JFrame {
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
         try {
             Statement st = javaConnect.ConnectorDB();
-            ResultSet r = st.executeQuery("SELECT order_no FROM order_ref WHERE order_no LIKE '%" + jTextField1.getText() + "%'");
+            ResultSet r = st.executeQuery("SELECT DISTINCT order_no FROM order_items WHERE order_no LIKE '%" + jTextField1.getText() + "%'");
             Vector v1 = new Vector();
 
             while (r.next()) {
@@ -275,19 +292,88 @@ public class Bill extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         try {
-            Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream(FILE));
-            document.open();
-            addMetaData(document);
-            addTitlePage(document);
-            //addContent(document);
-            document.close();
+            Statement st=javaConnect.ConnectorDB();
+            ResultSet rs=st.executeQuery("SELECT * FROM order_items where order_no='"+jTextField1.getText()+"'");
+            JasperReportBuilder report = DynamicReports.report();
+            
+            //Styles
+            StyleBuilder boldStyle=DynamicReports.stl.style().bold();
+            StyleBuilder titleStyle=DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.CENTER).setFontSize(15);
+            StyleBuilder TableHeaderStyle=DynamicReports.stl.style(titleStyle).setBorder(
+            
+            DynamicReports.stl.pen1Point()
+            ).setBackgroundColor(Color.LIGHT_GRAY);
+            StyleBuilder boldRight=DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.RIGHT).setFontSize(15);
+            StyleBuilder boldLeft=DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.LEFT).setFontSize(15);
+             StyleBuilder boldCenter=DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.CENTER).setFontSize(15);
+            //Add image
+            InputStream stream =Bill.class.getResourceAsStream("/IMG/InvoiceHeader.png");
+            ImageBuilder img=DynamicReports.cmp.image(stream).setFixedDimension(570, 260)
+                    .setStyle(DynamicReports.stl.style().setHorizontalAlignment(HorizontalAlignment.CENTER));
+            
+            
+            //title
+            net.sf.dynamicreports.report.builder.component.TextFieldBuilder<String> title = DynamicReports.cmp.text("Swarna Graphics");
+            title.setStyle(titleStyle);
+            
+            report.title(DynamicReports.cmp.horizontalFlowList(img));
+            //report.title(title);
 
-            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + "C:\\temp\\Bill.pdf");
+            //add table
+            //add columns
+            Date d=new Date();
+            String dtto=dt.format(d);
+            report.title(DynamicReports.cmp.horizontalFlowList(DynamicReports.cmp.text("To : "+jTextField2.getText()).setStyle(boldLeft),DynamicReports.cmp.text("Invoice No : "+jTextField1.getText()).setStyle(boldCenter),DynamicReports.cmp.text("Date : "+dtto).setStyle(boldRight) ));
+           report.title(DynamicReports.cmp.text("\n "));
+            TextColumnBuilder<String> itemNameColumn=Columns.column("Item", "type",DynamicReports.type.stringType());
+            TextColumnBuilder<String> itemQty=Columns.column("QTY", "size",DynamicReports.type.stringType());
+            TextColumnBuilder<Integer> itemPrice=Columns.column("Price", "item_price",DynamicReports.type.integerType());
+            
+            TextColumnBuilder<Integer> rownumCol=Columns.reportRowNumberColumn("  No  ").setFixedColumns(5).setHorizontalAlignment(HorizontalAlignment.CENTER);
+            
+            
+          //  report.subtotalsAtSummary(DynamicReports.sbt.sum(itemPrice));
+            
+            report.columns(rownumCol,itemNameColumn,itemQty,itemPrice);
+            
+            
+            
+            report.setColumnTitleStyle(TableHeaderStyle);
+            report.setDataSource(rs);
+            
+            FillerBuilder filler=DynamicReports.cmp.filler().setStyle(DynamicReports.stl.style().setBorder(
+            DynamicReports.stl.pen2Point())).setFixedHeight(2);
+            
+          
+            report.highlightDetailEvenRows();
+            
+            report.summary(DynamicReports.cmp.text("\n "));
+            String rep="Total : "+jTextField3.getText()+"\nPayed : ("+jTextField4.getText()+")\nDue Payment : "+jTextField5.getText()+"\n";
+            
+            report.summary(DynamicReports.cmp.text(rep).setStyle(boldRight));
+           report.show(false);
+            
+           // report.toPdf(new FileOutputStream(new File("c:\\temp\\Report.pdf")));
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+//        try {
+//            Document document = new Document();
+//            PdfWriter.getInstance(document, new FileOutputStream(FILE));
+//            document.open();
+//            addMetaData(document);
+//            addTitlePage(document);
+//            //addContent(document);
+//            document.close();
+//
+//            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + "C:\\temp\\Bill.pdf");
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
@@ -309,16 +395,37 @@ public class Bill extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel9MouseDragged
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        
-        if(emailadd.equals("")){
-           JOptionPane.showMessageDialog(null, "Customer dosen't have any e-Mail address "); 
+
+        if (emailadd.equals("")) {
+            JOptionPane.showMessageDialog(null, "Customer dosen't have any e-Mail address ");
+        } else {
+
+            sendMail();
         }
-        else{
-        
-        sendMail();
-        }
-        
+
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        char c = evt.getKeyChar();
+
+        if (Character.isDigit(c)) {
+        } else {
+
+            evt.consume();
+
+        }
+    }//GEN-LAST:event_jTextField1KeyTyped
+
+    private void jTextField7KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField7KeyTyped
+        char c = evt.getKeyChar();
+
+        if (Character.isDigit(c)) {
+        } else {
+
+            evt.consume();
+
+        }
+    }//GEN-LAST:event_jTextField7KeyTyped
 
     /**
      * @param args the command line arguments
@@ -397,8 +504,8 @@ public class Bill extends javax.swing.JFrame {
         document.add(preface2);
 
     }
-    
-    public void sendMail(){
+
+    public void sendMail() {
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");
@@ -407,26 +514,25 @@ public class Bill extends javax.swing.JFrame {
         props.put("mail.smtp.port", "465");
 
         Session session = Session.getDefaultInstance(props,
-            new javax.mail.Authenticator() {
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication("dilshanwn@gmail.com", "dilshanwd@2");
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication("dilshanwn@gmail.com", "dilshanwd@2");
+                    }
                 }
-            }
         );
-        try{
-            Message message=new MimeMessage(session);
+        try {
+            Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("dilshanwn@gmail.com"));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailadd));
             message.setSubject("Order Completed");
-            message.setText("Hi "+s2+", \nYour order with order no: "+s1+" is finished. you can collect it now from our office \nDue payment for the order is :LKR "+s5+"/= \n\nWith regards, \nSwarna Graphics ");
+            message.setText("Hi " + s2 + ", \nYour order with order no: " + s1 + " is finished. you can collect it now from our office \nDue payment for the order is :LKR " + s5 + "/= \n\nWith regards, \nSwarna Graphics ");
             Transport.send(message);
             JOptionPane.showMessageDialog(null, "sent");
 
-        }catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
 
     private static void addMetaData(Document document) {
         document.addTitle("INOICE");
@@ -514,16 +620,16 @@ public class Bill extends javax.swing.JFrame {
     }
 
     public void cal() {
-        int newpay=0;
+        int newpay = 0;
         s7 = jTextField7.getText();
         s3 = jTextField3.getText();
         s4 = jTextField4.getText();
-        
-        newpay=Integer.parseInt(s7);
+
+        newpay = Integer.parseInt(s7);
         tot = Integer.parseInt(s3);
         payed = Integer.parseInt(s4);
-        payed=payed+newpay; 
-        
+        payed = payed + newpay;
+
         due = tot - payed;
 
         s5 = Integer.toString(due);
@@ -543,6 +649,7 @@ public class Bill extends javax.swing.JFrame {
         jTextField5.setText("");
         jTextField6.setText("");
         jTextField7.setText("");
+        jButton4.setEnabled(true);
     }
 
     public void searchByOno() {
@@ -592,8 +699,14 @@ public class Bill extends javax.swing.JFrame {
             if (rs.next()) {
 
                 s2 = rs.getString("Name");
-                emailadd=rs.getString("Email");
+                emailadd = rs.getString("Email");
 
+            }
+            if (emailadd.equals("")) {
+
+                jButton4.setEnabled(false);
+            } else {
+                jButton4.setEnabled(true);
             }
 
         } catch (Exception e) {
@@ -633,7 +746,7 @@ public class Bill extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
 
-    String s1, s2, s3, s4, s5, s6,s7,emailadd, custno = "";
+    String s1, s2, s3, s4, s5, s6, s7, emailadd, custno = "";
     String odate, fdate, pday, today = null;
     int tot, payed, due = 0;
     DateFormat dt = new SimpleDateFormat("yyyy-MM-dd");

@@ -294,8 +294,17 @@ public class Materials extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       
-        
+       if(jTextField2.getText().equals("")|| jTextField2.getText().length()<5)
+             JOptionPane.showMessageDialog(this, "Item code is Invalid");
+       else if(jTextArea1.getText().equals(""))
+           JOptionPane.showMessageDialog(this, "Description Can't be Empty");
+        else if(jTextField4.getText().equals(""))
+           JOptionPane.showMessageDialog(this, "Qty Can't be Empty");
+        else if(jTextField5.getText().equals(""))
+           JOptionPane.showMessageDialog(this, "Unit price Can't be Empty");
+        else if(jTextField1.getText().equals(""))
+           JOptionPane.showMessageDialog(this, "Limit Can't be Empty");
+       else 
         insert();
         
     }//GEN-LAST:event_jButton2ActionPerformed

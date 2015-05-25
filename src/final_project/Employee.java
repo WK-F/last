@@ -122,7 +122,7 @@ public class Employee extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("NIC No");
+        jLabel4.setText("Employee ID");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -330,6 +330,10 @@ public class Employee extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if(jTextField2.getText().equals("")|| jTextField2.getText().length()<5)
+             JOptionPane.showMessageDialog(this, "Employee ID is Invalid");
+        
+        else
         insert();
      
 
@@ -411,7 +415,7 @@ public class Employee extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        
+cls();        
         try{
             int eno=10001;
             String z=null;
@@ -584,7 +588,9 @@ public class Employee extends javax.swing.JFrame {
         jTextField7.setText("");
         jTextField8.setText("");
         jTextField9.setText("");
-        
+        try{
+        noImg();
+        }catch(Exception e){}
          DateFormat dt=new SimpleDateFormat("yyyy-MM-dd");
         
         String x="2014-12-03";

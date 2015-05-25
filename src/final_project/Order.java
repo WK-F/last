@@ -161,12 +161,18 @@ public class Order extends javax.swing.JFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField1KeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
         });
         jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 21, 120, -1));
 
         jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField3KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField3KeyTyped(evt);
             }
         });
         jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 119, -1));
@@ -235,6 +241,7 @@ public class Order extends javax.swing.JFrame {
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Stencil", "Tracing", "Positive" }));
         jPanel1.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 318, -1, -1));
 
+        jTextField4.setEditable(false);
         jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextField4KeyTyped(evt);
@@ -524,7 +531,29 @@ public class Order extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try {
+        if (jTextField1.getText().isEmpty()||jTextField1.getText().length()<5) 
+            JOptionPane.showMessageDialog(this, "Order No is Invalid");
+        else  if (jTextField3.getText().isEmpty()||jTextField3.getText().length()<10) 
+            JOptionPane.showMessageDialog(this, "Customer NIC is Invalid");
+        else  if (jTextArea3.getText().isEmpty()) 
+            JOptionPane.showMessageDialog(this, "Description is Empty");
+        else  if (jTextField6.getText().equals("0")) 
+            JOptionPane.showMessageDialog(this, "Unit price can't be '0'");
+        else  if (jTextField5.getText().isEmpty()) 
+            JOptionPane.showMessageDialog(this, "Qty is Empty");
+        else  if (jTextArea2.getText().isEmpty()) 
+            JOptionPane.showMessageDialog(this, "Colours are Empty");
+//        else  if (jTextField4.getText().isEmpty()) 
+//            JOptionPane.showMessageDialog(this, "Price is Empty");
+        
+        
+         else   
+        insert();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    void insert(){
+    
+    try {
             addItem();
             DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
             dtm.setNumRows(0);
@@ -568,8 +597,8 @@ public class Order extends javax.swing.JFrame {
         } catch (Exception e) {
         }
         clsSameOrder();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
+    }
+    
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         try {
@@ -833,6 +862,29 @@ public class Order extends javax.swing.JFrame {
             System.out.println("2222222222222");
         }
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
+       char c = evt.getKeyChar();
+
+        if (Character.isDigit(c)) {
+        } else {
+            if (c == 'v' | c == 'V') {
+
+            } else {
+                evt.consume();
+            }
+        }
+    }//GEN-LAST:event_jTextField3KeyTyped
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        char c = evt.getKeyChar();
+
+        if (Character.isDigit(c)) {
+        } else {
+                evt.consume();
+            }
+        
+    }//GEN-LAST:event_jTextField1KeyTyped
 
     /**
      * @param args the command line arguments
