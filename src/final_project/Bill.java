@@ -516,13 +516,13 @@ public class Bill extends javax.swing.JFrame {
         Session session = Session.getDefaultInstance(props,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication("dilshanwn@gmail.com", "dilshanwd@2");
+                        return new PasswordAuthentication("contact.swarna.graphics@gmail.com", "sgprint@1");
                     }
                 }
         );
         try {
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("dilshanwn@gmail.com"));
+            message.setFrom(new InternetAddress("contact.swarna.graphics@gmail.com"));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailadd));
             message.setSubject("Order Completed");
             message.setText("Hi " + s2 + ", \nYour order with order no: " + s1 + " is finished. you can collect it now from our office \nDue payment for the order is :LKR " + s5 + "/= \n\nWith regards, \nSwarna Graphics ");
