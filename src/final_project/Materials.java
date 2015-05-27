@@ -24,6 +24,12 @@ public class Materials extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
+    public Materials(String x) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        jTextField2.setText(x);
+        searchByItemCode();
+    }
     int xMouse;
     int yMouse;
 
@@ -51,12 +57,16 @@ public class Materials extends javax.swing.JFrame {
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox();
+        jTextField6 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jComboBox2 = new javax.swing.JComboBox();
+        jComboBox3 = new javax.swing.JComboBox();
+        jButton6 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -95,17 +105,17 @@ public class Materials extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Item Code");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Type");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Description");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -123,13 +133,13 @@ public class Materials extends javax.swing.JFrame {
                 jTextField2KeyReleased(evt);
             }
         });
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 120, 30));
+        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 120, 30));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 160, 90));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 160, 90));
         getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, 120, 30));
         getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, 120, 30));
 
@@ -139,7 +149,24 @@ public class Materials extends javax.swing.JFrame {
                 jComboBox1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 120, 30));
+        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 120, 30));
+
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
+        jTextField6.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField6KeyReleased(evt);
+            }
+        });
+        getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, 120, 30));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Supplyer");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, -1, -1));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -199,7 +226,7 @@ public class Materials extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 30, 30));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 30, 30));
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
@@ -207,7 +234,23 @@ public class Materials extends javax.swing.JFrame {
                 jComboBox2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 120, 30));
+        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 120, 30));
+
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, 120, 30));
+
+        jButton6.setText("jButton6");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 250, 30, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/BARIMG/materials.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 540));
@@ -228,7 +271,7 @@ public class Materials extends javax.swing.JFrame {
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
-        System.exit(0);
+       this.dispose();
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -335,7 +378,45 @@ public class Materials extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    void searchByItemCode() throws Exception {
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField6ActionPerformed
+
+    private void jTextField6KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField6KeyReleased
+       try{
+        Statement st=javaConnect.ConnectorDB();
+        ResultSet r = st.executeQuery("SELECT Supply_Org FROM supplyer WHERE Supply_Org LIKE '%" + jTextField6.getText().toUpperCase() + "%'");
+        Vector v1 = new Vector();
+
+            while (r.next()) {
+                v1.add(r.getString("Supply_Org"));
+
+            }
+
+            jComboBox3.setModel(new DefaultComboBoxModel(v1));
+            jComboBox3.setPopupVisible(true);
+            jTextField6.setText(jTextField6.getText());   
+           
+       }
+       catch(Exception e)
+        {
+              e.printStackTrace();     
+                   
+        }
+    }//GEN-LAST:event_jTextField6KeyReleased
+
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+       jTextField6.setText(jComboBox3.getSelectedItem().toString());
+    }//GEN-LAST:event_jComboBox3ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+       supply s11=new supply(jTextField6.getText());
+       s11.setVisible(true);
+        
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    void searchByItemCode()  {
+        try{
         Statement st = javaConnect.ConnectorDB();
         ResultSet rs = st.executeQuery("SELECT * FROM items WHERE Item_Code='" + jTextField2.getText() + "'");
         if (rs.next()) {
@@ -347,26 +428,27 @@ public class Materials extends javax.swing.JFrame {
             jTextField4.setText(rs.getString("Qty"));
             jTextField5.setText(rs.getString("Unit_Price"));
             jTextField1.setText(rs.getString("Unit_limit"));
+            jTextField6.setText(rs.getString("Supply_ID"));
 
         }
-
+        }catch(Exception e){}
     }
     
     private void update() {
         try {
-           String a, b, c, d, e, f;
+           String a, b, c, d, e, f,g;
             a = jTextField2.getText();
             b = (String) jComboBox1.getSelectedItem();
             c=jTextArea1.getText();
             d = jTextField4.getText();
             e = jTextField5.getText();
             f = jTextField1.getText();
-
+            g=jTextField6.getText();
             int dr = JOptionPane.showConfirmDialog(null, "Are You Sure You Want to Replace The Record?");
             if (dr == JOptionPane.YES_OPTION) {
 
                 Statement st = javaConnect.ConnectorDB();
-                st.executeUpdate("update items set Type='" + b + "',Description='" + c + "',Qty='" + d + "',Unit_Price='" + e + "',Unit_limit='" + f + "' where Item_Code='" + a + "'");
+                st.executeUpdate("update items set Type='" + b + "',Description='" + c + "',Supply_ID='" + g + "',Qty='" + d + "',Unit_Price='" + e + "',Unit_limit='" + f + "' where Item_Code='" + a + "'");
                 JOptionPane.showMessageDialog(null, "Record Updated");
                cls();
 
@@ -379,16 +461,16 @@ public class Materials extends javax.swing.JFrame {
     
     private void insert(){
         try {
-            String a, b, c, d, e, f;
+            String a, b, c, d, e, f,g;
             a = jTextField2.getText();
             b = (String) jComboBox1.getSelectedItem();
             c=jTextArea1.getText();
             d = jTextField4.getText();
             e = jTextField5.getText();
             f = jTextField1.getText();
-
+            g=jTextField6.getText();
             Statement st = javaConnect.ConnectorDB();
-            st.executeUpdate("insert into items values ('" + a + "','" + b + "','" + c + "','" + d + "','" + e + "','" + f + "')");
+            st.executeUpdate("insert into items values ('" + a + "','" + b + "','" + c + "','" + g + "','" + d + "','" + e + "','" + f + "')");
             JOptionPane.showMessageDialog(this, "Matirial Added");
             cls();
 
@@ -404,7 +486,7 @@ public class Materials extends javax.swing.JFrame {
         jTextField4.setText("");
         jTextField5.setText("");
         jTextField1.setText("");
-
+        jTextField6.setText("");
     }
 
     /**
@@ -448,9 +530,12 @@ public class Materials extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JComboBox jComboBox3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -465,5 +550,6 @@ public class Materials extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 }

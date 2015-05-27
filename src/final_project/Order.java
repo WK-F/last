@@ -12,7 +12,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -44,6 +43,20 @@ public class Order extends javax.swing.JFrame {
             noImg();
             jTextField2.setText("0");
             jTextField6.setText("0");
+            //System.out.println("1 "+Arrays.toString(pib));
+        } catch (Exception e) {
+
+        }
+    }
+    public Order(String bb) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        try {
+            noImg();
+            jTextField2.setText("0");
+            jTextField6.setText("0");
+            jTextField1.setText(bb);
+            searchByOrder();
             //System.out.println("1 "+Arrays.toString(pib));
         } catch (Exception e) {
 
@@ -97,6 +110,7 @@ public class Order extends javax.swing.JFrame {
         jButton9 = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
+        jButton11 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -104,6 +118,7 @@ public class Order extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -111,6 +126,7 @@ public class Order extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/Actions-button-cancel-icon (1).png"))); // NOI18N
+        jLabel2.setToolTipText("Close");
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel2MouseClicked(evt);
@@ -121,6 +137,7 @@ public class Order extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tekton Pro Cond", 3, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("                                                                                                                            Order");
+        jLabel3.setToolTipText("Move window");
         jLabel3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jLabel3MouseDragged(evt);
@@ -157,6 +174,7 @@ public class Order extends javax.swing.JFrame {
         jLabel7.setText("Description");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 165, -1, -1));
 
+        jTextField1.setToolTipText("Order No.");
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField1KeyReleased(evt);
@@ -167,6 +185,7 @@ public class Order extends javax.swing.JFrame {
         });
         jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 21, 120, -1));
 
+        jTextField3.setToolTipText("Current order's owner's NIC No.");
         jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField3KeyReleased(evt);
@@ -195,6 +214,7 @@ public class Order extends javax.swing.JFrame {
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
+        jTextArea2.setToolTipText("Colours for the item");
         jScrollPane2.setViewportView(jTextArea2);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 150, 152, -1));
@@ -205,9 +225,11 @@ public class Order extends javax.swing.JFrame {
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 280, -1, -1));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "T-shirt", "Baners", "Caps", "Other Cloths", "Flags", "Other" }));
+        jComboBox1.setToolTipText("Select the Item Type");
         jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 119, 119, -1));
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", " " }));
+        jComboBox2.setToolTipText("Select no of Colours for the item");
         jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 280, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -236,12 +258,15 @@ public class Order extends javax.swing.JFrame {
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, -1, -1));
 
         jTextField2.setEditable(false);
+        jTextField2.setToolTipText("Total price of thhe entire order (auto generated)");
         jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 320, 87, -1));
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Stencil", "Tracing", "Positive" }));
+        jComboBox3.setToolTipText("Choose the screen type");
         jPanel1.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 318, -1, -1));
 
         jTextField4.setEditable(false);
+        jTextField4.setToolTipText("Item price (auto generated)");
         jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextField4KeyTyped(evt);
@@ -251,13 +276,18 @@ public class Order extends javax.swing.JFrame {
 
         jTextArea3.setColumns(20);
         jTextArea3.setRows(5);
+        jTextArea3.setToolTipText("Extra details about the current item");
         jScrollPane3.setViewportView(jTextArea3);
 
         jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 145, 158, -1));
+
+        jXDatePicker1.setToolTipText("Select the finishing date for the order");
         jPanel1.add(jXDatePicker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 260, 152, -1));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Image", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 255, 0))); // NOI18N
         jPanel2.setOpaque(false);
+
+        jLabel8.setToolTipText("Artwork/Image of the current item");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -282,6 +312,7 @@ public class Order extends javax.swing.JFrame {
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/save 1.png"))); // NOI18N
         jButton2.setText("Add");
+        jButton2.setToolTipText("Place current item to the order");
         jButton2.setContentAreaFilled(false);
         jButton2.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/save 2.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -295,6 +326,7 @@ public class Order extends javax.swing.JFrame {
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/clear1.png"))); // NOI18N
         jButton3.setText("Remove");
+        jButton3.setToolTipText("Delete the current item from the order");
         jButton3.setContentAreaFilled(false);
         jButton3.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/clear2.png"))); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -304,6 +336,7 @@ public class Order extends javax.swing.JFrame {
         });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(743, 301, -1, -1));
 
+        jTextField5.setToolTipText("Quantity");
         jTextField5.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField5KeyReleased(evt);
@@ -322,6 +355,7 @@ public class Order extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Browse");
+        jButton1.setToolTipText("Upload Artwork/Image");
         jButton1.setContentAreaFilled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -331,6 +365,7 @@ public class Order extends javax.swing.JFrame {
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(711, 260, -1, -1));
 
         jButton8.setText("jButton8");
+        jButton8.setToolTipText("Auto generates the next Order No.");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
@@ -339,6 +374,7 @@ public class Order extends javax.swing.JFrame {
         jPanel1.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 20, -1));
 
         jButton9.setText("jButton9");
+        jButton9.setToolTipText("Enter new customer Data");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
@@ -352,6 +388,7 @@ public class Order extends javax.swing.JFrame {
         jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, -1, -1));
 
         jTextField6.setText("0");
+        jTextField6.setToolTipText("Enter the Unit Price");
         jTextField6.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField6KeyReleased(evt);
@@ -361,6 +398,14 @@ public class Order extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, 80, -1));
+
+        jButton11.setText("jButton11");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, 20, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 880, 370));
 
@@ -389,6 +434,7 @@ public class Order extends javax.swing.JFrame {
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/delete 1.png"))); // NOI18N
         jButton4.setText("Delete");
+        jButton4.setToolTipText("Delete the entire order");
         jButton4.setContentAreaFilled(false);
         jButton4.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/delete 2.png"))); // NOI18N
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -402,6 +448,7 @@ public class Order extends javax.swing.JFrame {
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/pay.png"))); // NOI18N
         jButton5.setText("Bill");
+        jButton5.setToolTipText("Generate Bill, Pay , Send  Email to Customer");
         jButton5.setContentAreaFilled(false);
         jButton5.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/save 2.png"))); // NOI18N
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -415,6 +462,7 @@ public class Order extends javax.swing.JFrame {
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/update a.png"))); // NOI18N
         jButton6.setText("Update Status");
+        jButton6.setToolTipText("Update the processing status of the order");
         jButton6.setContentAreaFilled(false);
         jButton6.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/update 2.png"))); // NOI18N
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -422,12 +470,13 @@ public class Order extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, -1, -1));
+        jPanel3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, -1, -1));
 
         jButton7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton7.setForeground(new java.awt.Color(255, 255, 255));
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/clear1.png"))); // NOI18N
         jButton7.setText("Clear");
+        jButton7.setToolTipText("Clear Fields");
         jButton7.setContentAreaFilled(false);
         jButton7.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/clear2.png"))); // NOI18N
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -435,7 +484,16 @@ public class Order extends javax.swing.JFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, -1, -1));
+        jPanel3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 180, -1, -1));
+
+        jButton10.setText("Update Customer No");
+        jButton10.setToolTipText("Updates the customer's ID No. in cases of mistakes");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 170, -1));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 880, 230));
 
@@ -531,29 +589,28 @@ public class Order extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (jTextField1.getText().isEmpty()||jTextField1.getText().length()<5) 
+        if (jTextField1.getText().isEmpty() || jTextField1.getText().length() < 5) {
             JOptionPane.showMessageDialog(this, "Order No is Invalid");
-        else  if (jTextField3.getText().isEmpty()||jTextField3.getText().length()<10) 
+        } else if (jTextField3.getText().isEmpty() || jTextField3.getText().length() < 10) {
             JOptionPane.showMessageDialog(this, "Customer NIC is Invalid");
-        else  if (jTextArea3.getText().isEmpty()) 
+        } else if (jTextArea3.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Description is Empty");
-        else  if (jTextField6.getText().equals("0")) 
+        } else if (jTextField6.getText().equals("0")) {
             JOptionPane.showMessageDialog(this, "Unit price can't be '0'");
-        else  if (jTextField5.getText().isEmpty()) 
+        } else if (jTextField5.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Qty is Empty");
-        else  if (jTextArea2.getText().isEmpty()) 
+        } else if (jTextArea2.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Colours are Empty");
-//        else  if (jTextField4.getText().isEmpty()) 
-//            JOptionPane.showMessageDialog(this, "Price is Empty");
-        
-        
-         else   
-        insert();
+        } //        else  if (jTextField4.getText().isEmpty()) 
+        //            JOptionPane.showMessageDialog(this, "Price is Empty");
+        else {
+            insert();
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    void insert(){
-    
-    try {
+    void insert() {
+
+        try {
             addItem();
             DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
             dtm.setNumRows(0);
@@ -598,7 +655,7 @@ public class Order extends javax.swing.JFrame {
         }
         clsSameOrder();
     }
-    
+
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         try {
@@ -864,7 +921,7 @@ public class Order extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
-       char c = evt.getKeyChar();
+        char c = evt.getKeyChar();
 
         if (Character.isDigit(c)) {
         } else {
@@ -881,10 +938,43 @@ public class Order extends javax.swing.JFrame {
 
         if (Character.isDigit(c)) {
         } else {
-                evt.consume();
-            }
-        
+            evt.consume();
+        }
+
     }//GEN-LAST:event_jTextField1KeyTyped
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        try {
+            int dr = JOptionPane.showConfirmDialog(null, "Are You Sure You Want to Replace The Record?");
+            if (dr == JOptionPane.YES_OPTION) {
+
+                Statement st = javaConnect.ConnectorDB();
+                st.executeUpdate("update order_ref set cust_nic='" + jTextField3.getText() + "' where order_no='" + jTextField1.getText() + "'");
+                JOptionPane.showMessageDialog(null, "Customer ID Updated");
+
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e);
+        }
+
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        
+        String gg= jTextField3.getText();
+        if(gg.equalsIgnoreCase("")){
+            custOrder co=new custOrder();
+            co.setVisible(true);
+            this.dispose();
+        }
+        else{
+        custOrder co=new custOrder(gg);
+        co.setVisible(true);
+        this.dispose();
+        }
+        
+    }//GEN-LAST:event_jButton11ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1029,25 +1119,24 @@ public class Order extends javax.swing.JFrame {
             System.out.println("IMG error");
         }
     }
-    
-    
-    public void lastItemNoCheck()throws Exception{
-        Statement stt=javaConnect.ConnectorDB();
-      ResultSet rss= stt.executeQuery("select item_no from order_items where order_no='" + s1 + "' ORDER BY item_no");
-      
-      String www = null;
-            int test = 0;
-			int a=0;
-while (rss.next()) {
-                www = rss.getString("item_no");
-                test = 1;
-            }
-            if (test == 1) {
-                a = Integer.parseInt(www);
-                a++;
-            } 
-        ino=a;    
-      
+
+    public void lastItemNoCheck() throws Exception {
+        Statement stt = javaConnect.ConnectorDB();
+        ResultSet rss = stt.executeQuery("select item_no from order_items where order_no='" + s1 + "' ORDER BY item_no");
+
+        String www = null;
+        int test = 0;
+        int a = 0;
+        while (rss.next()) {
+            www = rss.getString("item_no");
+            test = 1;
+        }
+        if (test == 1) {
+            a = Integer.parseInt(www);
+            a++;
+        }
+        ino = a;
+
     }
 
     public void addItem() {
@@ -1278,8 +1367,8 @@ while (rss.next()) {
             rs = st.executeQuery(sql3);
             if (rs.next()) {
                 s2 = rs.getString("total");
-                totOrder=Integer.parseInt(s2);
-                
+                totOrder = Integer.parseInt(s2);
+
             }
         } catch (Exception e) {
         }
@@ -1293,6 +1382,8 @@ while (rss.next()) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

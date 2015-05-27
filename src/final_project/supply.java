@@ -6,6 +6,14 @@
 
 package final_project;
 
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Date;
+import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Hashen
@@ -18,6 +26,13 @@ int xMouse;
      */
     public supply() {
         initComponents();
+        this.setLocationRelativeTo(null);
+    }
+     public supply(String x) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        jTextField6.setText(x);
+        searchBySOrg();
     }
 
     /**
@@ -38,11 +53,14 @@ int xMouse;
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
+        jTextField6 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
+        jButton5 = new javax.swing.JButton();
+        jComboBox2 = new javax.swing.JComboBox();
+        jComboBox1 = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -55,7 +73,7 @@ int xMouse;
 
         jLabel3.setFont(new java.awt.Font("Tekton Pro", 3, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("                                                                     Supply");
+        jLabel3.setText("                                                                  Supplyers");
         jLabel3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jLabel3MouseDragged(evt);
@@ -78,7 +96,7 @@ int xMouse;
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Title");
+        jLabel4.setText("Organization");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -107,20 +125,58 @@ int xMouse;
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, -1, -1));
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 160, 30));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 140, 30));
+        jTextField6.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField6KeyReleased(evt);
+            }
+        });
+        getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 160, 30));
+
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField2KeyReleased(evt);
+            }
+        });
         getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 160, 30));
         getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 160, 30));
         getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, 160, 30));
         getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, 160, 30));
+
+        jButton5.setText("jButton5");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, 30, 30));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 160, 30));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 160, 30));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/delete 1.png"))); // NOI18N
         jButton1.setText("Delete");
         jButton1.setContentAreaFilled(false);
-        jButton1.setOpaque(false);
         jButton1.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/delete 2.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 470, -1, -1));
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -129,6 +185,11 @@ int xMouse;
         jButton2.setText("Save");
         jButton2.setContentAreaFilled(false);
         jButton2.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/save 2.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, -1, -1));
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -137,6 +198,11 @@ int xMouse;
         jButton3.setText("Update");
         jButton3.setContentAreaFilled(false);
         jButton3.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/update 2.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 470, -1, -1));
 
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -145,6 +211,11 @@ int xMouse;
         jButton4.setText("Clear");
         jButton4.setContentAreaFilled(false);
         jButton4.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/clear2.png"))); // NOI18N
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 470, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Tekton Pro", 3, 24)); // NOI18N
@@ -156,7 +227,7 @@ int xMouse;
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
-        System.exit(0);
+       this.dispose();
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
@@ -172,6 +243,227 @@ int xMouse;
         this.setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_jLabel3MouseDragged
 
+    private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
+       try{
+        Statement st=javaConnect.ConnectorDB();
+        ResultSet r = st.executeQuery("SELECT Supply_ID FROM supplyer WHERE Supply_ID LIKE '%" + jTextField2.getText() + "%'");
+        Vector v1 = new Vector();
+
+            while (r.next()) {
+                v1.add(r.getString("Supply_ID"));
+
+            }
+
+            jComboBox2.setModel(new DefaultComboBoxModel(v1));
+            jComboBox2.setPopupVisible(true);
+            jTextField2.setText(jTextField2.getText());   
+           
+       }
+       catch(Exception e)
+        {
+              e.printStackTrace();     
+                   
+        }
+    }//GEN-LAST:event_jTextField2KeyReleased
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+         jTextField2.setText(jComboBox2.getSelectedItem().toString());
+       searchBySid();
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+       cls();        
+        try{
+            int eno=80001;
+            String z=null;
+            int test =0;
+            Statement st=javaConnect.ConnectorDB();
+             ResultSet rs = st.executeQuery("SELECT Supply_ID FROM supplyer ORDER BY Supply_ID");
+             while (rs.next()) {
+                z=rs.getString("Supply_ID"); 
+                test=1;
+             }
+            if(test==1){
+                int a=Integer.parseInt(z);
+                a++;
+                z=Integer.toString(a);
+                
+            }
+            else{
+                z=Integer.toString(eno);
+            }
+             jTextField2.setText(z);
+            
+        }
+        catch(Exception e){
+        
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jTextField6KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField6KeyReleased
+        try{
+        Statement st=javaConnect.ConnectorDB();
+        ResultSet r = st.executeQuery("SELECT Supply_Org FROM supplyer WHERE Supply_Org LIKE '%" + jTextField6.getText().toUpperCase() + "%'");
+        Vector v1 = new Vector();
+
+            while (r.next()) {
+                v1.add(r.getString("Supply_Org"));
+
+            }
+
+            jComboBox1.setModel(new DefaultComboBoxModel(v1));
+            jComboBox1.setPopupVisible(true);
+            jTextField6.setText(jTextField6.getText());   
+           
+       }
+       catch(Exception e)
+        {
+              e.printStackTrace();     
+                   
+        }
+    }//GEN-LAST:event_jTextField6KeyReleased
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+         jTextField6.setText(jComboBox1.getSelectedItem().toString());
+       searchBySOrg();
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+       cls();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+      insert();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       update();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String a = jTextField2.getText();
+        int dr = JOptionPane.showConfirmDialog(null, "Are You Sure You Want to Delete The Record?");
+        if (dr == JOptionPane.YES_OPTION) {
+
+            try {
+                Statement st = javaConnect.ConnectorDB();
+                st.executeUpdate("delete from supplyer where Supply_ID	='" + a + "' ");
+                JOptionPane.showMessageDialog(this, "Material Deleted");
+                cls();
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    
+     private void insert(){
+        try {
+            String a, b, c, d, e, f,g;
+            a = jTextField2.getText();
+            b =jTextField6.getText().toUpperCase();
+            
+            d = jTextField3.getText();
+            e = jTextField4.getText();
+            f = jTextField5.getText();
+            g=  jTextField1.getText();
+            Statement st = javaConnect.ConnectorDB();
+            st.executeUpdate("insert into supplyer values ('" + a + "','" + b + "','" + g + "','" + d + "','" + e + "','" + f + "')");
+            JOptionPane.showMessageDialog(this, "Supplyer Added");
+            cls();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e);
+        }
+
+    }
+     
+     private void update() {
+        try {
+           String a, b, c, d, e, f,g;
+            a = jTextField2.getText();
+            b = jTextField6.getText().toUpperCase();
+            
+            d = jTextField3.getText();
+            e = jTextField4.getText();
+            f = jTextField5.getText();
+            g=jTextField1.getText();
+            int dr = JOptionPane.showConfirmDialog(null, "Are You Sure You Want to Replace The Record?");
+            if (dr == JOptionPane.YES_OPTION) {
+
+                Statement st = javaConnect.ConnectorDB();
+                st.executeUpdate("update  supplyer set Supply_Org='" + b + "',Supply_Dealer='" + d + "',Supply_Address='" + e + "',Supply_Tel='" + f + "',Supply_Email='" + g + "' where Supply_ID='" + a + "'");
+                JOptionPane.showMessageDialog(null, "Record Updated");
+               cls();
+
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e);
+        }
+
+    }
+     
+     
+    public void searchBySid(){
+        try{
+            
+            Statement st=javaConnect.ConnectorDB();
+        ResultSet rs = st.executeQuery("SELECT * FROM supplyer WHERE Supply_ID='" + jTextField2.getText() + "'");
+        if (rs.next()) {
+           jTextField2.setText(rs.getString("Supply_ID"));
+           jTextField6.setText(rs.getString("Supply_Org"));
+           jTextField3.setText(rs.getString("Supply_Dealer"));
+           jTextField4.setText(rs.getString("Supply_Address"));
+           jTextField5.setText(rs.getString("Supply_Tel"));
+           jTextField1.setText(rs.getString("Supply_Email"));  
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Supplyer not Registered ");
+            cls();
+        }
+            
+            
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(this,e);
+        }
+    }
+    public void searchBySOrg(){
+        try{
+            
+            Statement st=javaConnect.ConnectorDB();
+        ResultSet rs = st.executeQuery("SELECT * FROM supplyer WHERE Supply_Org='" + jTextField6.getText().toUpperCase() + "'");
+        if (rs.next()) {
+           jTextField2.setText(rs.getString("Supply_ID"));
+           jTextField6.setText(rs.getString("Supply_Org"));
+           jTextField3.setText(rs.getString("Supply_Dealer"));
+           jTextField4.setText(rs.getString("Supply_Address"));
+           jTextField5.setText(rs.getString("Supply_Tel"));
+           jTextField1.setText(rs.getString("Supply_Email"));  
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Supplyer not Registered ");
+            cls();
+        }
+            
+            
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(this,e);
+        }
+    }
+    public void cls(){
+    
+            jTextField2.setText("");
+           jTextField6.setText("");
+           jTextField3.setText("");
+           jTextField4.setText("");
+           jTextField5.setText("");
+           jTextField1.setText("");
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -212,7 +504,9 @@ int xMouse;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -227,5 +521,6 @@ int xMouse;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 }

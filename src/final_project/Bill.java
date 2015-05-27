@@ -9,6 +9,8 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import java.awt.Color;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -17,12 +19,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
 import java.util.Vector;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.mail.Message;
+import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
@@ -88,6 +96,7 @@ public class Bill extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -121,6 +130,7 @@ public class Bill extends javax.swing.JFrame {
         jLabel5.setText("Due Payment");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, -1));
 
+        jTextField1.setToolTipText("Order No.");
         jTextField1.setNextFocusableComponent(jTextField4);
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -141,21 +151,26 @@ public class Bill extends javax.swing.JFrame {
         getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 220, 30));
 
         jTextField2.setEditable(false);
+        jTextField2.setToolTipText("Name of the Customer");
         getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 220, 31));
 
         jTextField3.setEditable(false);
+        jTextField3.setToolTipText("Total Payment for the order");
         getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 220, 31));
 
         jTextField4.setEditable(false);
+        jTextField4.setToolTipText("Payed amount");
         getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 100, 31));
 
         jTextField5.setEditable(false);
+        jTextField5.setToolTipText("Payment Due. for the current order");
         getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 160, 31));
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/pay.png"))); // NOI18N
         jButton2.setText("Pay");
+        jButton2.setToolTipText("Make Payment");
         jButton2.setContentAreaFilled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,6 +183,7 @@ public class Bill extends javax.swing.JFrame {
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/clear1.png"))); // NOI18N
         jButton3.setText("Clear");
+        jButton3.setToolTipText("Clear fields");
         jButton3.setContentAreaFilled(false);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,6 +196,7 @@ public class Bill extends javax.swing.JFrame {
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/generate.png"))); // NOI18N
         jButton5.setText("Generate");
+        jButton5.setToolTipText("Generate the Invoice for current order");
         jButton5.setContentAreaFilled(false);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -193,6 +210,7 @@ public class Bill extends javax.swing.JFrame {
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/Email-icon32.png"))); // NOI18N
         jButton4.setText("mail");
+        jButton4.setToolTipText("Send order completion e-Mail to the customer ");
         jButton4.setContentAreaFilled(false);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,6 +229,7 @@ public class Bill extends javax.swing.JFrame {
         jLabel10.setText("+");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(263, 195, -1, -1));
 
+        jTextField7.setToolTipText("Paying amount");
         jTextField7.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextField7KeyTyped(evt);
@@ -219,9 +238,20 @@ public class Bill extends javax.swing.JFrame {
         getContentPane().add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 100, 30));
 
         jTextField6.setEditable(false);
+        jTextField6.setToolTipText("Status of the order");
         getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, 160, 31));
 
+        jButton1.setText("jButton1");
+        jButton1.setToolTipText("Updates the status of the order");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 290, 20, 30));
+
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/Actions-button-cancel-icon (1).png"))); // NOI18N
+        jLabel8.setToolTipText("Close");
         jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel8MouseClicked(evt);
@@ -232,6 +262,7 @@ public class Bill extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Tekton Pro Cond", 1, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("                                                                         Bill");
+        jLabel9.setToolTipText("Close window");
         jLabel9.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jLabel9MouseDragged(evt);
@@ -306,7 +337,12 @@ public class Bill extends javax.swing.JFrame {
             StyleBuilder boldRight=DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.RIGHT).setFontSize(15);
             StyleBuilder boldLeft=DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.LEFT).setFontSize(15);
              StyleBuilder boldCenter=DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.CENTER).setFontSize(15);
-            //Add image
+            
+             StyleBuilder normalRight=DynamicReports.stl.style().setHorizontalAlignment(HorizontalAlignment.RIGHT).setFontSize(13);
+            StyleBuilder normalLeft=DynamicReports.stl.style().setHorizontalAlignment(HorizontalAlignment.LEFT).setFontSize(13);
+
+
+//Add image
             InputStream stream =Bill.class.getResourceAsStream("/IMG/InvoiceHeader.png");
             ImageBuilder img=DynamicReports.cmp.image(stream).setFixedDimension(570, 260)
                     .setStyle(DynamicReports.stl.style().setHorizontalAlignment(HorizontalAlignment.CENTER));
@@ -351,9 +387,17 @@ public class Bill extends javax.swing.JFrame {
             String rep="Total : "+jTextField3.getText()+"\nPayed : ("+jTextField4.getText()+")\nDue Payment : "+jTextField5.getText()+"\n";
             
             report.summary(DynamicReports.cmp.text(rep).setStyle(boldRight));
+            
+            report.summary(DynamicReports.cmp.text("\n "));
+            report.summary(DynamicReports.cmp.text("\n "));
+            report.summary(DynamicReports.cmp.text("\n "));
+            String abc="(Customer)";
+            String xyz="(Cashier)";
+            report.summary(DynamicReports.cmp.horizontalFlowList(DynamicReports.cmp.text(abc).setStyle(normalLeft),DynamicReports.cmp.text(xyz).setStyle(normalRight) ));
+            
            report.show(false);
             
-           // report.toPdf(new FileOutputStream(new File("c:\\temp\\Report.pdf")));
+            report.toPdf(new FileOutputStream(new File("c:\\temp\\Invoice.pdf")));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -426,6 +470,17 @@ public class Bill extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_jTextField7KeyTyped
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       
+        if (jTextField1.getText().equals("")) {
+            Status sssss = new Status();
+            sssss.setVisible(true);
+        } else {
+            Status sssss = new Status(jTextField1.getText());
+            sssss.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -521,11 +576,27 @@ public class Bill extends javax.swing.JFrame {
                 }
         );
         try {
+            String msgBody="Hi " + s2 + ", \nYour order with order no: " + s1 + " is finished. you can collect it now from our office \nDue payment for the order is :LKR " + s5 + "/= \n\nWith regards, \nSwarna Graphics ";
+            
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("contact.swarna.graphics@gmail.com"));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailadd));
             message.setSubject("Order Completed");
-            message.setText("Hi " + s2 + ", \nYour order with order no: " + s1 + " is finished. you can collect it now from our office \nDue payment for the order is :LKR " + s5 + "/= \n\nWith regards, \nSwarna Graphics ");
+            
+            
+            MimeBodyPart messageBodyPart=new MimeBodyPart();
+            messageBodyPart.setText(msgBody);
+            Multipart multipart=new MimeMultipart();
+            multipart.addBodyPart(messageBodyPart);
+            
+            
+            messageBodyPart=new MimeBodyPart();
+            DataSource source=new FileDataSource("c:\\temp\\Invoice.pdf");
+            messageBodyPart.setDataHandler(new DataHandler(source));
+            messageBodyPart.setFileName("Invoice.pdf");
+            multipart.addBodyPart(messageBodyPart);
+            message.setContent(multipart);
+            
             Transport.send(message);
             JOptionPane.showMessageDialog(null, "sent");
 
@@ -722,6 +793,7 @@ public class Bill extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

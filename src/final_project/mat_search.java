@@ -6,6 +6,13 @@
 
 package final_project;
 
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Hashen
@@ -18,6 +25,8 @@ int xMouse;
      */
     public mat_search() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        searchAll();
     }
 
     /**
@@ -29,9 +38,18 @@ int xMouse;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox();
+        jTextField2 = new javax.swing.JTextField();
+        jComboBox2 = new javax.swing.JComboBox();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTable6 = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
@@ -39,44 +57,96 @@ int xMouse;
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable5 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton1.setText("Clear");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 40, -1, -1));
+
+        jButton2.setText("Depleted Materials");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 40, -1, -1));
+
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, 170, 30));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, 170, 30));
+
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField2KeyReleased(evt);
+            }
+        });
+        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 40, 170, 30));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 40, 170, 30));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Screen", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 0, 0))); // NOI18N
         jPanel1.setOpaque(false);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Item Code", "Description", "Quantity", "Unit Price", "Limit"
+                "Item Code", "Description", "Supplyer", "Quantity", "Unit Price", "Limit"
             }
         ));
         jTable2.setOpaque(false);
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -95,37 +165,97 @@ int xMouse;
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 430, 250));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 430, 250));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cloths", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 0, 0))); // NOI18N
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cloths", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 0, 0))); // NOI18N
+        jPanel5.setOpaque(false);
+
+        jTable6.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Item Code", "Description", "Supplyer", "Quantity", "Unit Price", "Limit"
+            }
+        ));
+        jTable6.setOpaque(false);
+        jTable6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable6MouseClicked(evt);
+            }
+        });
+        jScrollPane6.setViewportView(jTable6);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 430, 250));
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Paint", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 0, 0))); // NOI18N
         jPanel2.setOpaque(false);
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Item Code", "Description", "Quantity", "Unit Price", "Limit"
+                "Item Code", "Description", "Supplyer", "Quantity", "Unit Price", "Limit"
             }
         ));
         jTable3.setOpaque(false);
+        jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable3MouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTable3);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -147,10 +277,91 @@ int xMouse;
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, 430, 250));
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Paints", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 0, 0))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Others", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 0, 0))); // NOI18N
         jPanel3.setOpaque(false);
 
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Item Code", "Description", "Supplyer", "Quantity", "Unit Price", "Limit"
+            }
+        ));
+        jTable4.setOpaque(false);
+        jTable4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable4MouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(jTable4);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 370, 430, 250));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/Actions-button-cancel-icon (1).png"))); // NOI18N
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 0, 30, 30));
+
+        jLabel3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabel3MouseDragged(evt);
+            }
+        });
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel3MousePressed(evt);
+            }
+        });
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 4, 930, 20));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/BACKIMG/matesearch.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 650));
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cloths", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 0, 0))); // NOI18N
+        jPanel4.setOpaque(false);
+
+        jTable5.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -175,55 +386,27 @@ int xMouse;
                 "Item Code", "Description", "Quantity", "Unit Price", "Limit"
             }
         ));
-        jTable4.setOpaque(false);
-        jScrollPane4.setViewportView(jTable4);
+        jTable5.setOpaque(false);
+        jScrollPane5.setViewportView(jTable5);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 360, 430, 250));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/Actions-button-cancel-icon (1).png"))); // NOI18N
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
-            }
-        });
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 0, 30, 30));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 170, 30));
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 170, 30));
-
-        jLabel3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jLabel3MouseDragged(evt);
-            }
-        });
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel3MousePressed(evt);
-            }
-        });
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 4, 930, 20));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/BACKIMG/matesearch.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 650));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, 430, 250));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -250,6 +433,471 @@ int xMouse;
         this.setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_jLabel3MouseDragged
 
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+       try{
+        Statement st=javaConnect.ConnectorDB();
+        ResultSet r = st.executeQuery("SELECT Item_Code FROM items WHERE Item_Code LIKE '%" + jTextField1.getText() + "%'");
+        Vector v1 = new Vector();
+
+            while (r.next()) {
+                v1.add(r.getString("Item_Code"));
+
+            }
+
+            jComboBox1.setModel(new DefaultComboBoxModel(v1));
+            jComboBox1.setPopupVisible(true);
+            jTextField1.setText(jTextField1.getText());   
+           
+       }
+       catch(Exception e)
+        {
+              e.printStackTrace();     
+                   
+        }
+    }//GEN-LAST:event_jTextField1KeyReleased
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+       jTextField1.setText(jComboBox1.getSelectedItem().toString());
+       searchByIno();
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jTextField1.setText("");
+        jTextField2.setText("");
+        searchAll();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTable6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable6MouseClicked
+      DefaultTableModel model = (DefaultTableModel) jTable6.getModel();
+      try{
+          String iid="";
+       ArrayList<String> data = new ArrayList<>();
+            int row = jTable6.getSelectedRow();
+
+            int col = model.getColumnCount();
+            for (int i = 0; i < col; i++) {
+                String x = model.getValueAt(row, i).toString();
+                data.add(x);
+            }
+            iid = data.get(0);
+          final_project.Materials xxx=new final_project.Materials(iid);
+          xxx.setVisible(true);
+      
+      }catch(Exception e){
+      
+      }
+    }//GEN-LAST:event_jTable6MouseClicked
+
+    private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
+     DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
+      try{
+          String iid="";
+       ArrayList<String> data = new ArrayList<>();
+            int row = jTable3.getSelectedRow();
+
+            int col = model.getColumnCount();
+            for (int i = 0; i < col; i++) {
+                String x = model.getValueAt(row, i).toString();
+                data.add(x);
+            }
+            iid = data.get(0);
+          final_project.Materials xxx=new final_project.Materials(iid);
+          xxx.setVisible(true);
+      
+      }catch(Exception e){
+      
+      }
+    }//GEN-LAST:event_jTable3MouseClicked
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+      DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+      try{
+          String iid="";
+       ArrayList<String> data = new ArrayList<>();
+            int row = jTable2.getSelectedRow();
+
+            int col = model.getColumnCount();
+            for (int i = 0; i < col; i++) {
+                String x = model.getValueAt(row, i).toString();
+                data.add(x);
+            }
+            iid = data.get(0);
+          final_project.Materials xxx=new final_project.Materials(iid);
+          xxx.setVisible(true);
+      
+      }catch(Exception e){
+      
+      }
+    }//GEN-LAST:event_jTable2MouseClicked
+
+    private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
+       DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
+      try{
+          String iid="";
+       ArrayList<String> data = new ArrayList<>();
+            int row = jTable4.getSelectedRow();
+
+            int col = model.getColumnCount();
+            for (int i = 0; i < col; i++) {
+                String x = model.getValueAt(row, i).toString();
+                data.add(x);
+            }
+            iid = data.get(0);
+          final_project.Materials xxx=new final_project.Materials(iid);
+          xxx.setVisible(true);
+      
+      }catch(Exception e){
+      
+      }
+    }//GEN-LAST:event_jTable4MouseClicked
+
+    private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
+       try{
+        Statement st=javaConnect.ConnectorDB();
+        ResultSet r = st.executeQuery("SELECT Description FROM items WHERE Description LIKE '%" + jTextField2.getText() + "%'");
+        Vector v1 = new Vector();
+
+            while (r.next()) {
+                v1.add(r.getString("Description"));
+
+            }
+
+            jComboBox2.setModel(new DefaultComboBoxModel(v1));
+            jComboBox2.setPopupVisible(true);
+            jTextField2.setText(jTextField2.getText());   
+           
+       }
+       catch(Exception e)
+        {
+              e.printStackTrace();     
+                   
+        }
+    }//GEN-LAST:event_jTextField2KeyReleased
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+       jTextField2.setText(jComboBox2.getSelectedItem().toString());
+       searchByDesc();
+       
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+      searchDepleted();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+public void searchByIno(){
+try{
+    String x=jTextField1.getText();
+     DefaultTableModel dtm = (DefaultTableModel) jTable6.getModel();
+        dtm.setNumRows(0);
+        Statement st = javaConnect.ConnectorDB();
+            String sql1 = "select * from items where Type='Cloths' AND Item_Code='"+x+"' ";
+           String sql2 = "select * from items where Type='Paint' AND Item_Code='"+x+"' ";
+           String sql3 = "select * from items where Type='Screen' AND Item_Code='"+x+"'";
+           String sql4 = "select * from items where Type='Other' AND Item_Code='"+x+"'";
+            String x1,x2,x3,x4,x5,x6="";
+            DefaultTableModel model = (DefaultTableModel) jTable6.getModel();
+            ResultSet rs = st.executeQuery(sql1);
+            model.setNumRows(0);
+             while (rs.next()) {
+                x1 = rs.getString("Item_Code");
+                x2 = rs.getString("Description");
+                x3 = rs.getString("Qty");
+                x4 = rs.getString("Unit_Price");
+                x5 = rs.getString("Unit_limit");
+                x6= rs.getString("Supply_ID");
+                Object[] row = {x1, x2,x6, x3, x4, x5};
+                model.addRow(row);
+              
+                
+                
+            }
+            DefaultTableModel model2 = (DefaultTableModel) jTable3.getModel();    
+             rs = st.executeQuery(sql2);
+             model2.setNumRows(0);
+             while (rs.next()) {
+                x1 = rs.getString("Item_Code");
+                x2 = rs.getString("Description");
+                x3 = rs.getString("Qty");
+                x4 = rs.getString("Unit_Price");
+                x5 = rs.getString("Unit_limit");
+               
+x6= rs.getString("Supply_ID");
+                Object[] row = {x1, x2,x6, x3, x4, x5};
+                model2.addRow(row);
+             }
+             
+             DefaultTableModel model3 = (DefaultTableModel) jTable2.getModel();    
+             rs = st.executeQuery(sql3);
+             model3.setNumRows(0);
+             while (rs.next()) {
+                x1 = rs.getString("Item_Code");
+                x2 = rs.getString("Description");
+                x3 = rs.getString("Qty");
+                x4 = rs.getString("Unit_Price");
+                x5 = rs.getString("Unit_limit");
+              x6= rs.getString("Supply_ID");
+                Object[] row = {x1, x2,x6, x3, x4, x5};
+                model3.addRow(row);
+             }
+             
+             DefaultTableModel model4 = (DefaultTableModel) jTable4.getModel();    
+             rs = st.executeQuery(sql4);
+             model4.setNumRows(0);
+             while (rs.next()) {
+                x1 = rs.getString("Item_Code");
+                x2 = rs.getString("Description");
+                x3 = rs.getString("Qty");
+                x4 = rs.getString("Unit_Price");
+                x5 = rs.getString("Unit_limit");
+               x6= rs.getString("Supply_ID");
+                Object[] row = {x1, x2,x6, x3, x4, x5};
+                model4.addRow(row);
+             }
+}catch(Exception e){
+
+}
+
+}    
+public void searchByDesc(){
+try{
+    String x=jTextField2.getText();
+     DefaultTableModel dtm = (DefaultTableModel) jTable6.getModel();
+        dtm.setNumRows(0);
+        Statement st = javaConnect.ConnectorDB();
+            String sql1 = "select * from items where Type='Cloths' AND Description LIKE'"+x+"' ";
+           String sql2 = "select * from items where Type='Paint' AND Description LIKE'"+x+"' ";
+           String sql3 = "select * from items where Type='Screen' AND Description LIKE'"+x+"'";
+           String sql4 = "select * from items where Type='Other' AND Description LIKE '"+x+"'";
+            String x1,x2,x3,x4,x5,x6="";
+            DefaultTableModel model = (DefaultTableModel) jTable6.getModel();
+            ResultSet rs = st.executeQuery(sql1);
+            model.setNumRows(0);
+             while (rs.next()) {
+                x1 = rs.getString("Item_Code");
+                x2 = rs.getString("Description");
+                x3 = rs.getString("Qty");
+                x4 = rs.getString("Unit_Price");
+                x5 = rs.getString("Unit_limit");
+                x6= rs.getString("Supply_ID");
+                Object[] row = {x1, x2,x6, x3, x4, x5};
+                model.addRow(row);
+              
+                
+                
+            }
+            DefaultTableModel model2 = (DefaultTableModel) jTable3.getModel();    
+             rs = st.executeQuery(sql2);
+             model2.setNumRows(0);
+             while (rs.next()) {
+                x1 = rs.getString("Item_Code");
+                x2 = rs.getString("Description");
+                x3 = rs.getString("Qty");
+                x4 = rs.getString("Unit_Price");
+                x5 = rs.getString("Unit_limit");
+               
+x6= rs.getString("Supply_ID");
+                Object[] row = {x1, x2,x6, x3, x4, x5};
+                model2.addRow(row);
+             }
+             
+             DefaultTableModel model3 = (DefaultTableModel) jTable2.getModel();    
+             rs = st.executeQuery(sql3);
+             model3.setNumRows(0);
+             while (rs.next()) {
+                x1 = rs.getString("Item_Code");
+                x2 = rs.getString("Description");
+                x3 = rs.getString("Qty");
+                x4 = rs.getString("Unit_Price");
+                x5 = rs.getString("Unit_limit");
+              x6= rs.getString("Supply_ID");
+                Object[] row = {x1, x2,x6, x3, x4, x5};
+                model3.addRow(row);
+             }
+             
+             DefaultTableModel model4 = (DefaultTableModel) jTable4.getModel();    
+             rs = st.executeQuery(sql4);
+             model4.setNumRows(0);
+             while (rs.next()) {
+                x1 = rs.getString("Item_Code");
+                x2 = rs.getString("Description");
+                x3 = rs.getString("Qty");
+                x4 = rs.getString("Unit_Price");
+                x5 = rs.getString("Unit_limit");
+               x6= rs.getString("Supply_ID");
+                Object[] row = {x1, x2,x6, x3, x4, x5};
+                model4.addRow(row);
+             }
+}catch(Exception e){
+
+}
+
+}        
+
+
+    public void searchAll(){
+try{
+     DefaultTableModel dtm = (DefaultTableModel) jTable6.getModel();
+        dtm.setNumRows(0);
+        Statement st = javaConnect.ConnectorDB();
+            String sql1 = "select * from items where Type='Cloths' ";
+           String sql2 = "select * from items where Type='Paint' ";
+           String sql3 = "select * from items where Type='Screen' ";
+           String sql4 = "select * from items where Type='Other' ";
+            String x1,x2,x3,x4,x5,x6="";
+            DefaultTableModel model = (DefaultTableModel) jTable6.getModel();
+            ResultSet rs = st.executeQuery(sql1);
+            model.setNumRows(0);
+             while (rs.next()) {
+                x1 = rs.getString("Item_Code");
+                x2 = rs.getString("Description");
+                x3 = rs.getString("Qty");
+                x4 = rs.getString("Unit_Price");
+                x5 = rs.getString("Unit_limit");
+                x6= rs.getString("Supply_ID");
+                Object[] row = {x1, x2,x6, x3, x4, x5};
+                model.addRow(row);
+              
+                
+                
+            }
+            DefaultTableModel model2 = (DefaultTableModel) jTable3.getModel();    
+             rs = st.executeQuery(sql2);
+             model2.setNumRows(0);
+             while (rs.next()) {
+                x1 = rs.getString("Item_Code");
+                x2 = rs.getString("Description");
+                x3 = rs.getString("Qty");
+                x4 = rs.getString("Unit_Price");
+                x5 = rs.getString("Unit_limit");
+               x6= rs.getString("Supply_ID");
+                Object[] row = {x1, x2,x6, x3, x4, x5};
+                model2.addRow(row);
+             }
+             
+             DefaultTableModel model3 = (DefaultTableModel) jTable2.getModel();    
+             rs = st.executeQuery(sql3);
+             model3.setNumRows(0);
+             while (rs.next()) {
+                x1 = rs.getString("Item_Code");
+                x2 = rs.getString("Description");
+                x3 = rs.getString("Qty");
+                x4 = rs.getString("Unit_Price");
+                x5 = rs.getString("Unit_limit");
+               
+                x6= rs.getString("Supply_ID");
+                Object[] row = {x1, x2,x6, x3, x4, x5};
+                model3.addRow(row);
+             }
+             
+             DefaultTableModel model4 = (DefaultTableModel) jTable4.getModel();    
+             rs = st.executeQuery(sql4);
+             model4.setNumRows(0);
+             while (rs.next()) {
+                x1 = rs.getString("Item_Code");
+                x2 = rs.getString("Description");
+                x3 = rs.getString("Qty");
+                x4 = rs.getString("Unit_Price");
+                x5 = rs.getString("Unit_limit");
+               x6= rs.getString("Supply_ID");
+                Object[] row = {x1, x2,x6, x3, x4, x5};
+                model4.addRow(row);
+             }
+}catch(Exception e){
+
+}
+
+}
+    
+     public void searchDepleted(){
+try{
+     DefaultTableModel dtm = (DefaultTableModel) jTable6.getModel();
+        dtm.setNumRows(0);
+        Statement st = javaConnect.ConnectorDB();
+            String sql1 = "select * from items where Type='Cloths' ";
+           String sql2 = "select * from items where Type='Paint' ";
+           String sql3 = "select * from items where Type='Screen' ";
+           String sql4 = "select * from items where Type='Other' ";
+            String x1,x2,x3,x4,x5,x6="";
+            int q,l=0;
+            DefaultTableModel model = (DefaultTableModel) jTable6.getModel();
+            ResultSet rs = st.executeQuery(sql1);
+            model.setNumRows(0);
+             while (rs.next()) {
+                x1 = rs.getString("Item_Code");
+                x2 = rs.getString("Description");
+                x3 = rs.getString("Qty");
+                x4 = rs.getString("Unit_Price");
+                x5 = rs.getString("Unit_limit");
+                x6= rs.getString("Supply_ID");
+                
+                q=Integer.parseInt(x3);
+                l=Integer.parseInt(x5);
+                if(l>=q){
+                Object[] row = {x1, x2,x6, x3, x4, x5};
+                model.addRow(row);
+                }
+                
+                
+            }
+            DefaultTableModel model2 = (DefaultTableModel) jTable3.getModel();    
+             rs = st.executeQuery(sql2);
+             model2.setNumRows(0);
+             while (rs.next()) {
+                x1 = rs.getString("Item_Code");
+                x2 = rs.getString("Description");
+                x3 = rs.getString("Qty");
+                x4 = rs.getString("Unit_Price");
+                x5 = rs.getString("Unit_limit");
+               x6= rs.getString("Supply_ID");
+                q=Integer.parseInt(x3);
+                l=Integer.parseInt(x5);
+                if(l>=q){
+                Object[] row = {x1, x2,x6, x3, x4, x5};
+                model2.addRow(row);
+                }
+             }
+             
+             DefaultTableModel model3 = (DefaultTableModel) jTable2.getModel();    
+             rs = st.executeQuery(sql3);
+             model3.setNumRows(0);
+             while (rs.next()) {
+                x1 = rs.getString("Item_Code");
+                x2 = rs.getString("Description");
+                x3 = rs.getString("Qty");
+                x4 = rs.getString("Unit_Price");
+                x5 = rs.getString("Unit_limit");
+               
+                x6= rs.getString("Supply_ID");
+                q=Integer.parseInt(x3);
+                l=Integer.parseInt(x5);
+                if(l>=q){
+                Object[] row = {x1, x2,x6, x3, x4, x5};
+                model3.addRow(row);
+                }
+             }
+             
+             DefaultTableModel model4 = (DefaultTableModel) jTable4.getModel();    
+             rs = st.executeQuery(sql4);
+             model4.setNumRows(0);
+             while (rs.next()) {
+                x1 = rs.getString("Item_Code");
+                x2 = rs.getString("Description");
+                x3 = rs.getString("Qty");
+                x4 = rs.getString("Unit_Price");
+                x5 = rs.getString("Unit_limit");
+               x6= rs.getString("Supply_ID");
+               q=Integer.parseInt(x3);
+                l=Integer.parseInt(x5);
+                if(l>=q){
+                Object[] row = {x1, x2,x6, x3, x4, x5};
+                model4.addRow(row);
+                }
+             }
+}catch(Exception e){
+
+}
+
+}
     /**
      * @param args the command line arguments
      */
@@ -286,18 +934,28 @@ int xMouse;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
+    private javax.swing.JTable jTable5;
+    private javax.swing.JTable jTable6;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables

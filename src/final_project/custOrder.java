@@ -7,27 +7,33 @@ package final_project;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author DILSHAN
  */
-public class Status extends javax.swing.JFrame {
+public class custOrder extends javax.swing.JFrame {
     int xMouse;
     int yMouse;
+    int STAT=0;
     /**
      * Creates new form Status
      */
-    public Status() {
+    public custOrder() {
         initComponents();
         this.setLocationRelativeTo(null);
+        STAT=0;
     }
-    public Status(String a) {
+    public custOrder(String a) {
         initComponents();
+        this.setLocationRelativeTo(null);
         jTextField1.setText(a);
-        searchByOno();
+        STAT=1;
+        searchByCustNic();
         
     }
 
@@ -41,13 +47,13 @@ public class Status extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox();
-        jComboBox2 = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -57,13 +63,8 @@ public class Status extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Order No :");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 89, 28));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Status");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 64, 27));
+        jLabel1.setText("Customer NIC :");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 110, 28));
 
         jLabel9.setFont(new java.awt.Font("Tekton Pro Cond", 1, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -93,7 +94,7 @@ public class Status extends javax.swing.JFrame {
                 jTextField1KeyReleased(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 170, -1));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, 170, -1));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -101,18 +102,38 @@ public class Status extends javax.swing.JFrame {
                 jComboBox1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 170, -1));
+        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, 170, -1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "PENDING", "PROCESSING", "PENDING PICKUP", "COMPLETED" }));
-        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 166, 27));
-
-        jButton1.setText("Update Status");
+        jButton1.setText("Clear");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, -1, -1));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Order No", "Date"
+            }
+        ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 310, 140));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/BACKIMG/status.png"))); // NOI18N
         jLabel3.setPreferredSize(new java.awt.Dimension(450, 260));
@@ -124,11 +145,11 @@ public class Status extends javax.swing.JFrame {
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
         try {
             Statement st = javaConnect.ConnectorDB();
-            ResultSet r = st.executeQuery("SELECT order_no FROM order_ref WHERE order_no LIKE '%" + jTextField1.getText() + "%'");
+            ResultSet r = st.executeQuery("SELECT DISTINCT cust_nic FROM order_ref WHERE cust_nic LIKE '%" + jTextField1.getText() + "%'");
             Vector v1 = new Vector();
 
             while (r.next()) {
-                v1.add(r.getString("order_no"));
+                v1.add(r.getString("cust_nic"));
 
             }
 
@@ -144,18 +165,11 @@ public class Status extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         jTextField1.setText(jComboBox1.getSelectedItem().toString());
-        searchByOno();
+        searchByCustNic();
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        s1=jTextField1.getText();
-        jcbs2=(String)jComboBox2.getSelectedItem();
-        try{
-            Statement st=javaConnect.ConnectorDB();
-            st.executeUpdate("update order_status set status='"+jcbs2+"' where order_no='"+s1+"'  ");
-        }catch(Exception e){
-        }
-        
+        cls();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel9MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseDragged
@@ -176,6 +190,31 @@ public class Status extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jLabel8MouseClicked
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+      try{
+          String ono="";
+       ArrayList<String> data = new ArrayList<>();
+            int row = jTable1.getSelectedRow();
+
+            int col = model.getColumnCount();
+            for (int i = 0; i < col; i++) {
+                String x = model.getValueAt(row, i).toString();
+                data.add(x);
+            }
+            ono = data.get(0);
+          final_project.Order xxx=new final_project.Order(ono);
+          xxx.setVisible(true);
+          this.dispose();
+      
+      }catch(Exception e){
+      
+      }
+        
+        
+    }//GEN-LAST:event_jTable1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -193,34 +232,47 @@ public class Status extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Status.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(custOrder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Status.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(custOrder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Status.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(custOrder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Status.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(custOrder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Status().setVisible(true);
+                new custOrder().setVisible(true);
             }
         });
     }
-
-    public void searchByOno() {
+public void cls(){
+DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+           
+            model.setNumRows(0);
+            jTextField1.setText("");
+}
+    public void searchByCustNic() {
         try{
-            s1 = jTextField1.getText();
+           String x=jTextField1.getText();
             Statement st = javaConnect.ConnectorDB();
-            ResultSet rs = st.executeQuery("SELECT * FROM order_status WHERE order_no='" + jTextField1.getText() + "'");
-             if (rs.next()) {
-                 String x = rs.getString("status");
-                jComboBox2.setSelectedItem(x);
-             }
+            String sql1 = "select * from order_ref where  cust_nic='"+x+"' ";
             
+            String x1,x2="";
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            ResultSet rs = st.executeQuery(sql1);
+            model.setNumRows(0);
+             while (rs.next()) {
+                x1 = rs.getString("order_no");
+                x2 = rs.getString("o_date");
+               
+                Object[] row = {x1, x2};
+                model.addRow(row);
+             }
         }catch(Exception e){
         }
     }
@@ -228,12 +280,12 @@ public class Status extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
