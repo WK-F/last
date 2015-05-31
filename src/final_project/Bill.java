@@ -325,6 +325,7 @@ public class Bill extends javax.swing.JFrame {
         try {
             Statement st=javaConnect.ConnectorDB();
             ResultSet rs=st.executeQuery("SELECT * FROM order_items where order_no='"+jTextField1.getText()+"'");
+          //  ResultSet rs2=st.executeQuery("SELECT * FROM order_items where order_no='"+jTextField1.getText()+"'");
             JasperReportBuilder report = DynamicReports.report();
             
             //Styles
