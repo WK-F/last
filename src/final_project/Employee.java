@@ -113,6 +113,7 @@ public class Employee extends javax.swing.JFrame {
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/Actions-button-cancel-icon (1).png"))); // NOI18N
+        jLabel2.setToolTipText("Close");
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel2MouseClicked(evt);
@@ -170,6 +171,7 @@ public class Employee extends javax.swing.JFrame {
         jLabel13.setText("Email");
         getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, -1, -1));
 
+        jTextField2.setToolTipText("Employee ID");
         jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField2KeyReleased(evt);
@@ -187,6 +189,8 @@ public class Employee extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 150, 30));
+
+        jTextField4.setToolTipText("address");
         getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 195, 150, 30));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mr.", "Miss.", "Mrs." }));
@@ -196,8 +200,11 @@ public class Employee extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 95, 150, 30));
+
+        jTextField3.setToolTipText("Name");
         getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 145, 150, 30));
 
+        jTextField5.setToolTipText("Contact no");
         jTextField5.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextField5KeyTyped(evt);
@@ -205,8 +212,11 @@ public class Employee extends javax.swing.JFrame {
         });
         getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 245, 150, 30));
         getContentPane().add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 345, 150, 30));
+
+        jTextField8.setToolTipText("Emergency no");
         getContentPane().add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 395, 150, 30));
 
+        jTextField9.setToolTipText("Email Address");
         jTextField9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField9ActionPerformed(evt);
@@ -249,6 +259,7 @@ public class Employee extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Tekton Pro", 3, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Browse");
+        jButton1.setToolTipText("Image");
         jButton1.setContentAreaFilled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

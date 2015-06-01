@@ -77,6 +77,7 @@ public class Customer extends javax.swing.JFrame {
 
         jButton5.setBackground(new Color(0, 0, 0, 0));
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/Actions-button-cancel-icon (1).png"))); // NOI18N
+        jButton5.setToolTipText("Close");
         jButton5.setBorder(null);
         jButton5.setOpaque(false);
         jButton5.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/close20x20.png"))); // NOI18N
@@ -112,6 +113,8 @@ public class Customer extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Email Address");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 385, -1, 30));
+
+        jTextField1.setToolTipText("Email address");
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 385, 180, 30));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -119,6 +122,7 @@ public class Customer extends javax.swing.JFrame {
         jLabel6.setText("NIC NO");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, 30));
 
+        jTextField2.setToolTipText("customer NIC");
         jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextField2KeyPressed(evt);
@@ -158,6 +162,7 @@ public class Customer extends javax.swing.JFrame {
         });
         getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 165, 180, 30));
 
+        jTextField3.setToolTipText("Name");
         jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField3KeyReleased(evt);
@@ -181,6 +186,7 @@ public class Customer extends javax.swing.JFrame {
         jLabel8.setText("Telephone No");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 275, -1, 30));
 
+        jTextField4.setToolTipText("Contact no");
         jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextField4KeyPressed(evt);
@@ -195,6 +201,8 @@ public class Customer extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Address");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 330, -1, 30));
+
+        jTextField5.setToolTipText("Address");
         getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, 180, 30));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N

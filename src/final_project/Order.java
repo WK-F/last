@@ -442,7 +442,7 @@ public class Order extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 180, -1, -1));
+        jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 180, -1, -1));
 
         jButton5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
@@ -470,7 +470,7 @@ public class Order extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, -1, -1));
+        jPanel3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 180, -1, -1));
 
         jButton7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton7.setForeground(new java.awt.Color(255, 255, 255));
@@ -484,16 +484,21 @@ public class Order extends javax.swing.JFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 180, -1, -1));
+        jPanel3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 180, -1, -1));
 
+        jButton10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton10.setForeground(new java.awt.Color(255, 255, 255));
+        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/update a.png"))); // NOI18N
         jButton10.setText("Update Customer No");
         jButton10.setToolTipText("Updates the customer's ID No. in cases of mistakes");
+        jButton10.setContentAreaFilled(false);
+        jButton10.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/update 2.png"))); // NOI18N
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton10ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 170, -1));
+        jPanel3.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 220, -1));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 880, 230));
 

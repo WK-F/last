@@ -90,6 +90,7 @@ public class Materials extends javax.swing.JFrame {
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/Actions-button-cancel-icon (1).png"))); // NOI18N
+        jLabel2.setToolTipText("Close");
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel2MouseClicked(evt);
@@ -126,8 +127,11 @@ public class Materials extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Limit");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, -1, -1));
+
+        jTextField1.setToolTipText("Limit");
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 120, 30));
 
+        jTextField2.setToolTipText("Item Code");
         jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField2KeyReleased(evt);
@@ -137,10 +141,15 @@ public class Materials extends javax.swing.JFrame {
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
+        jTextArea1.setToolTipText("Description");
         jScrollPane1.setViewportView(jTextArea1);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 160, 90));
+
+        jTextField4.setToolTipText("Quantity");
         getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, 120, 30));
+
+        jTextField5.setToolTipText("Unit Price");
         getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, 120, 30));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Screen", "Cloths", "Paint", "Other" }));
@@ -151,6 +160,7 @@ public class Materials extends javax.swing.JFrame {
         });
         getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 120, 30));
 
+        jTextField6.setToolTipText("Supplier Id");
         jTextField6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField6ActionPerformed(evt);

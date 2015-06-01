@@ -87,6 +87,7 @@ int xMouse;
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 4, 560, 20));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/Actions-button-cancel-icon (1).png"))); // NOI18N
+        jLabel2.setToolTipText("Close");
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel2MouseClicked(evt);
@@ -123,8 +124,11 @@ int xMouse;
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("E mail");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, -1, -1));
+
+        jTextField1.setToolTipText("Email address");
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 160, 30));
 
+        jTextField6.setToolTipText("Organization");
         jTextField6.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField6KeyReleased(evt);
@@ -132,14 +136,21 @@ int xMouse;
         });
         getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 160, 30));
 
+        jTextField2.setToolTipText("Supply ID");
         jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField2KeyReleased(evt);
             }
         });
         getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 160, 30));
+
+        jTextField3.setToolTipText("Name");
         getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 160, 30));
+
+        jTextField4.setToolTipText("Address");
         getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, 160, 30));
+
+        jTextField5.setToolTipText("Contact No");
         getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, 160, 30));
 
         jButton5.setText("jButton5");
