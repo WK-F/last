@@ -29,19 +29,18 @@ import net.sf.dynamicreports.report.constant.HorizontalAlignment;
  */
 public class SalesReports extends javax.swing.JFrame {
 
-public int thisYear=Calendar.getInstance().get(Calendar.YEAR);
-int xMouse;
+    public int thisYear = Calendar.getInstance().get(Calendar.YEAR);
+    int xMouse;
     int yMouse;
+
     /**
      * Creates new form SalesReports
      */
     public SalesReports() {
         initComponents();
-       setCombo();
-       
-       
-    
-        
+        this.setLocationRelativeTo(null);
+        setCombo();
+
     }
 
     /**
@@ -225,13 +224,13 @@ int xMouse;
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
-    
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         generate1();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-      generate2();
+        generate2();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -240,12 +239,12 @@ int xMouse;
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jLabel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MousePressed
         // TODO add your handling code here:
-         xMouse = evt.getX();
+        xMouse = evt.getX();
         yMouse = evt.getY();
     }//GEN-LAST:event_jLabel6MousePressed
 
@@ -256,87 +255,76 @@ int xMouse;
         this.setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_jLabel6MouseDragged
 
-    public void generate1(){
-    String y=(String)jComboBox1.getSelectedItem();
-    String m=(String)jComboBox2.getSelectedItem();
-    int mm=Integer.parseInt(m);
-    String mn="";
-    String[] molist={"January","February","March","April","May","June","July","August","September","October","November","December"};
-    for(int i=1;i<13;i++){
-    if(mm==i){
-        mn=molist[i-1];
-    }
-    
-    }
-    
-    
-    String sql1="select of.order_no, cust.Name,op.total from order_ref of, customer cust, order_payments op where of.cust_nic= cust.NIC and of.order_no= op.order_no and MONTH(of.o_date)='"+m+"' and YEAR(of.o_date)='"+y+"'";
+    public void generate1() {
+        String y = (String) jComboBox1.getSelectedItem();
+        String m = (String) jComboBox2.getSelectedItem();
+        int mm = Integer.parseInt(m);
+        String mn = "";
+        String[] molist = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        for (int i = 1; i < 13; i++) {
+            if (mm == i) {
+                mn = molist[i - 1];
+            }
+
+        }
+
+        String sql1 = "select of.order_no, cust.Name,op.total from order_ref of, customer cust, order_payments op where of.cust_nic= cust.NIC and of.order_no= op.order_no and MONTH(of.o_date)='" + m + "' and YEAR(of.o_date)='" + y + "'";
 //    String sql2="select oi.type,SUM(oi.size) QTY,SUM(oi.item_price) Earning from order_ref of,order_items oi where of.order_no= oi.order_no and MONTH(of.o_date)='"+m+"' and YEAR(of.o_date)='"+y+"'  GROUP BY oi.type";
 //       String sql2="select type,SUM(size) QTY,SUM(item_price) Earning from order_items where MONTH(o_date)='"+m+"' and YEAR(o_date)='"+y+"'  GROUP BY type";
 
 // 
-    try{
-      
-       Statement st=javaConnect.ConnectorDB();
-       Statement st2=javaConnect.ConnectorDB();
-        ResultSet rs=st.executeQuery(sql1);
-//        ResultSet rs2=st2.executeQuery(sql2);
-        
-    JasperReportBuilder report = DynamicReports.report();
-    StyleBuilder boldStyle=DynamicReports.stl.style().bold();
-            StyleBuilder titleStyle=DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.CENTER).setFontSize(18);
-            StyleBuilder TableHeaderStyle=DynamicReports.stl.style(titleStyle).setBorder(
-            
-            DynamicReports.stl.pen1Point()
-            ).setBackgroundColor(Color.LIGHT_GRAY);
-            StyleBuilder boldRight=DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.RIGHT).setFontSize(15);
-            StyleBuilder boldLeft=DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.LEFT).setFontSize(15);
-             StyleBuilder boldCenter=DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.CENTER).setFontSize(15);
-            
-             StyleBuilder normalRight=DynamicReports.stl.style().setHorizontalAlignment(HorizontalAlignment.RIGHT).setFontSize(13);
-            StyleBuilder normalLeft=DynamicReports.stl.style().setHorizontalAlignment(HorizontalAlignment.LEFT).setFontSize(13);
+        try {
 
-            
+            Statement st = javaConnect.ConnectorDB();
+            Statement st2 = javaConnect.ConnectorDB();
+            ResultSet rs = st.executeQuery(sql1);
+//        ResultSet rs2=st2.executeQuery(sql2);
+
+            JasperReportBuilder report = DynamicReports.report();
+            StyleBuilder boldStyle = DynamicReports.stl.style().bold();
+            StyleBuilder titleStyle = DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.CENTER).setFontSize(18);
+            StyleBuilder TableHeaderStyle = DynamicReports.stl.style(titleStyle).setBorder(
+                    DynamicReports.stl.pen1Point()
+            ).setBackgroundColor(Color.LIGHT_GRAY);
+            StyleBuilder boldRight = DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.RIGHT).setFontSize(15);
+            StyleBuilder boldLeft = DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.LEFT).setFontSize(15);
+            StyleBuilder boldCenter = DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.CENTER).setFontSize(15);
+
+            StyleBuilder normalRight = DynamicReports.stl.style().setHorizontalAlignment(HorizontalAlignment.RIGHT).setFontSize(13);
+            StyleBuilder normalLeft = DynamicReports.stl.style().setHorizontalAlignment(HorizontalAlignment.LEFT).setFontSize(13);
+
             //image
-            InputStream stream =Bill.class.getResourceAsStream("/IMG/Sr.png");
-            ImageBuilder img=DynamicReports.cmp.image(stream).setFixedDimension(570, 210)
+            InputStream stream = Bill.class.getResourceAsStream("/IMG/Sr.png");
+            ImageBuilder img = DynamicReports.cmp.image(stream).setFixedDimension(570, 210)
                     .setStyle(DynamicReports.stl.style().setHorizontalAlignment(HorizontalAlignment.CENTER));
-            
-            
-            net.sf.dynamicreports.report.builder.component.TextFieldBuilder<String> title = DynamicReports.cmp.text("For Year : "+y+" Month : "+mn);
+
+            net.sf.dynamicreports.report.builder.component.TextFieldBuilder<String> title = DynamicReports.cmp.text("For Year : " + y + " Month : " + mn);
             title.setStyle(titleStyle);
-            
+
             report.title(DynamicReports.cmp.horizontalFlowList(img));
             report.title(title);
-            report.title(DynamicReports.cmp.text("Processed Orders for "+mn).setStyle(boldLeft));
-            
-            
-            TextColumnBuilder<String> orderColumn=Columns.column("Order No", "order_no",DynamicReports.type.stringType());
-            TextColumnBuilder<String> custColumn=Columns.column("Customer", "Name",DynamicReports.type.stringType());
-            TextColumnBuilder<Integer> priceColumn=Columns.column("Price(Total)", "total",DynamicReports.type.integerType());
-            
-            TextColumnBuilder<Integer> rownumCol=Columns.reportRowNumberColumn("  No  ").setFixedColumns(5).setHorizontalAlignment(HorizontalAlignment.CENTER);
-            
+            report.title(DynamicReports.cmp.text("Processed Orders for " + mn).setStyle(boldLeft));
+
+            TextColumnBuilder<String> orderColumn = Columns.column("Order No", "order_no", DynamicReports.type.stringType());
+            TextColumnBuilder<String> custColumn = Columns.column("Customer", "Name", DynamicReports.type.stringType());
+            TextColumnBuilder<Integer> priceColumn = Columns.column("Price(Total)", "total", DynamicReports.type.integerType());
+
+            TextColumnBuilder<Integer> rownumCol = Columns.reportRowNumberColumn("  No  ").setFixedColumns(5).setHorizontalAlignment(HorizontalAlignment.CENTER);
+
             report.subtotalsAtSummary(DynamicReports.sbt.sum(priceColumn).setStyle(boldStyle));
-            
-             report.columns(rownumCol,orderColumn,custColumn,priceColumn);
-            
-            
-            
+
+            report.columns(rownumCol, orderColumn, custColumn, priceColumn);
+
             report.setColumnTitleStyle(TableHeaderStyle);
             report.setDataSource(rs);
-            
-            FillerBuilder filler=DynamicReports.cmp.filler().setStyle(DynamicReports.stl.style().setBorder(
-            DynamicReports.stl.pen2Point())).setFixedHeight(2);
-            
-          
+
+            FillerBuilder filler = DynamicReports.cmp.filler().setStyle(DynamicReports.stl.style().setBorder(
+                    DynamicReports.stl.pen2Point())).setFixedHeight(2);
+
             report.highlightDetailEvenRows();
-            
-            
-            
+
             //report.setTitleOnANewPage(true);
             //report.title(DynamicReports.cmp.horizontalFlowList(img));
-           
 //            JasperReportBuilder report1 = DynamicReports.report();
 //            JasperReportBuilder report2 = DynamicReports.report();
 //       InputStream stream1 =Bill.class.getResourceAsStream("/IMG/Sr2.png");
@@ -356,70 +344,63 @@ int xMouse;
 //            report1.setColumnTitleStyle(TableHeaderStyle);
 //            report1.setDataSource(rs2);
 //            report1.highlightDetailEvenRows();
-            
-            
-            
 //            Bar3DChartBuilder chart=DynamicReports.cht.bar3DChart().setTitle("Item sales for"+mn).setCategory(TypeColumn).addSerie(DynamicReports.cht.serie(ipriceColumn));
 //            
 //            Bar3DChartBuilder chart2=DynamicReports.cht.bar3DChart().setTitle("Item Quantity for"+mn).setCategory(TypeColumn).addSerie(DynamicReports.cht.serie(QtyColumn));
 //            report1.summary(chart);
 //           report1.summary(chart2);     
-           
-             report.show(false);
+            report.show(false);
 //             report1.show(false);
-    }catch(Exception e){
-    
+        } catch (Exception e) {
+
+        }
     }
-    }
-    
-    public void generate2(){
-    String y=(String)jComboBox1.getSelectedItem();
-    String m=(String)jComboBox2.getSelectedItem();
-    int mm=Integer.parseInt(m);
-    String mn="";
-    String[] molist={"January","February","March","April","May","June","July","August","September","October","November","December"};
-    for(int i=1;i<13;i++){
-    if(mm==i){
-        mn=molist[i-1];
-    }
-    
-    }
-    
-    
+
+    public void generate2() {
+        String y = (String) jComboBox1.getSelectedItem();
+        String m = (String) jComboBox2.getSelectedItem();
+        int mm = Integer.parseInt(m);
+        String mn = "";
+        String[] molist = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        for (int i = 1; i < 13; i++) {
+            if (mm == i) {
+                mn = molist[i - 1];
+            }
+
+        }
+
 //    String sql1="select of.order_no, cust.Name,op.total from order_ref of, customer cust, order_payments op where of.cust_nic= cust.NIC and of.order_no= op.order_no and MONTH(of.o_date)='"+m+"' and YEAR(of.o_date)='"+y+"'";
-    String sql2="select oi.type,SUM(oi.size) QTY,SUM(oi.item_price) Earning from order_ref of,order_items oi where of.order_no= oi.order_no and MONTH(of.o_date)='"+m+"' and YEAR(of.o_date)='"+y+"'  GROUP BY oi.type";
+        String sql2 = "select oi.type,SUM(oi.size) QTY,SUM(oi.item_price) Earning from order_ref of,order_items oi where of.order_no= oi.order_no and MONTH(of.o_date)='" + m + "' and YEAR(of.o_date)='" + y + "'  GROUP BY oi.type";
 //       String sql2="select type,SUM(size) QTY,SUM(item_price) Earning from order_items where MONTH(o_date)='"+m+"' and YEAR(o_date)='"+y+"'  GROUP BY type";
 
 // 
-    try{
-      
-       Statement st=javaConnect.ConnectorDB();
-       Statement st2=javaConnect.ConnectorDB();
-//        ResultSet rs=st.executeQuery(sql1);
-        ResultSet rs2=st2.executeQuery(sql2);
-        
-//    JasperReportBuilder report = DynamicReports.report();
-    StyleBuilder boldStyle=DynamicReports.stl.style().bold();
-            StyleBuilder titleStyle=DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.CENTER).setFontSize(18);
-            StyleBuilder TableHeaderStyle=DynamicReports.stl.style(titleStyle).setBorder(
-            
-            DynamicReports.stl.pen1Point()
-            ).setBackgroundColor(Color.LIGHT_GRAY);
-            StyleBuilder boldRight=DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.RIGHT).setFontSize(15);
-            StyleBuilder boldLeft=DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.LEFT).setFontSize(15);
-             StyleBuilder boldCenter=DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.CENTER).setFontSize(15);
-            
-             StyleBuilder normalRight=DynamicReports.stl.style().setHorizontalAlignment(HorizontalAlignment.RIGHT).setFontSize(13);
-            StyleBuilder normalLeft=DynamicReports.stl.style().setHorizontalAlignment(HorizontalAlignment.LEFT).setFontSize(13);
+        try {
 
-            
+            Statement st = javaConnect.ConnectorDB();
+            Statement st2 = javaConnect.ConnectorDB();
+//        ResultSet rs=st.executeQuery(sql1);
+            ResultSet rs2 = st2.executeQuery(sql2);
+
+//    JasperReportBuilder report = DynamicReports.report();
+            StyleBuilder boldStyle = DynamicReports.stl.style().bold();
+            StyleBuilder titleStyle = DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.CENTER).setFontSize(18);
+            StyleBuilder TableHeaderStyle = DynamicReports.stl.style(titleStyle).setBorder(
+                    DynamicReports.stl.pen1Point()
+            ).setBackgroundColor(Color.LIGHT_GRAY);
+            StyleBuilder boldRight = DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.RIGHT).setFontSize(15);
+            StyleBuilder boldLeft = DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.LEFT).setFontSize(15);
+            StyleBuilder boldCenter = DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.CENTER).setFontSize(15);
+
+            StyleBuilder normalRight = DynamicReports.stl.style().setHorizontalAlignment(HorizontalAlignment.RIGHT).setFontSize(13);
+            StyleBuilder normalLeft = DynamicReports.stl.style().setHorizontalAlignment(HorizontalAlignment.LEFT).setFontSize(13);
+
             //image
 //            InputStream stream =Bill.class.getResourceAsStream("/IMG/Sr.png");
 //            ImageBuilder img=DynamicReports.cmp.image(stream).setFixedDimension(570, 210)
 //                    .setStyle(DynamicReports.stl.style().setHorizontalAlignment(HorizontalAlignment.CENTER));
 //            
 //            
-            net.sf.dynamicreports.report.builder.component.TextFieldBuilder<String> title = DynamicReports.cmp.text("For Year : "+y+" Month : "+mn);
+            net.sf.dynamicreports.report.builder.component.TextFieldBuilder<String> title = DynamicReports.cmp.text("For Year : " + y + " Month : " + mn);
             title.setStyle(titleStyle);
 //            
 //            report.title(DynamicReports.cmp.horizontalFlowList(img));
@@ -441,164 +422,138 @@ int xMouse;
 //            
 //            report.setColumnTitleStyle(TableHeaderStyle);
 //            report.setDataSource(rs);
-            
+
 //            FillerBuilder filler=DynamicReports.cmp.filler().setStyle(DynamicReports.stl.style().setBorder(
 //            DynamicReports.stl.pen2Point())).setFixedHeight(2);
 //            
 //          
 //            report.highlightDetailEvenRows();
-            
-            
-            
             //report.setTitleOnANewPage(true);
             //report.title(DynamicReports.cmp.horizontalFlowList(img));
-           
             JasperReportBuilder report1 = DynamicReports.report();
             JasperReportBuilder report2 = DynamicReports.report();
-       InputStream stream1 =Bill.class.getResourceAsStream("/IMG/Sr2.png");
-            ImageBuilder img2=DynamicReports.cmp.image(stream1).setFixedDimension(570, 210)
+            InputStream stream1 = Bill.class.getResourceAsStream("/IMG/Sr2.png");
+            ImageBuilder img2 = DynamicReports.cmp.image(stream1).setFixedDimension(570, 210)
                     .setStyle(DynamicReports.stl.style().setHorizontalAlignment(HorizontalAlignment.CENTER));
-            
+
             report1.title(DynamicReports.cmp.horizontalFlowList(img2));
             report1.title(title);
-            report1.title(DynamicReports.cmp.text("Items sold in "+mn).setStyle(boldLeft));
-            TextColumnBuilder<String> TypeColumn=Columns.column("Type", "type",DynamicReports.type.stringType());
-            TextColumnBuilder<Integer> QtyColumn=Columns.column("Qty", "QTY",DynamicReports.type.integerType());
-            TextColumnBuilder<Integer> ipriceColumn=Columns.column("Item Price(Total)", "Earning",DynamicReports.type.integerType());
-            TextColumnBuilder<Integer> rownumCol2=Columns.reportRowNumberColumn("  No  ").setFixedColumns(5).setHorizontalAlignment(HorizontalAlignment.CENTER);
-             report1.subtotalsAtSummary(DynamicReports.sbt.sum(ipriceColumn).setStyle(boldStyle));
-            report1.columns(rownumCol2,TypeColumn,QtyColumn,ipriceColumn);
-            
+            report1.title(DynamicReports.cmp.text("Items sold in " + mn).setStyle(boldLeft));
+            TextColumnBuilder<String> TypeColumn = Columns.column("Type", "type", DynamicReports.type.stringType());
+            TextColumnBuilder<Integer> QtyColumn = Columns.column("Qty", "QTY", DynamicReports.type.integerType());
+            TextColumnBuilder<Integer> ipriceColumn = Columns.column("Item Price(Total)", "Earning", DynamicReports.type.integerType());
+            TextColumnBuilder<Integer> rownumCol2 = Columns.reportRowNumberColumn("  No  ").setFixedColumns(5).setHorizontalAlignment(HorizontalAlignment.CENTER);
+            report1.subtotalsAtSummary(DynamicReports.sbt.sum(ipriceColumn).setStyle(boldStyle));
+            report1.columns(rownumCol2, TypeColumn, QtyColumn, ipriceColumn);
+
             report1.setColumnTitleStyle(TableHeaderStyle);
             report1.setDataSource(rs2);
             report1.highlightDetailEvenRows();
-            
-            
-            
-            Bar3DChartBuilder chart=DynamicReports.cht.bar3DChart()
-                    .setTitle("Item sales for"+mn).setCategory(TypeColumn).addSerie(DynamicReports.cht.serie(ipriceColumn))
+
+            Bar3DChartBuilder chart = DynamicReports.cht.bar3DChart()
+                    .setTitle("Item sales for" + mn).setCategory(TypeColumn).addSerie(DynamicReports.cht.serie(ipriceColumn))
                     .setUseSeriesAsCategory(true);
-            
-            Bar3DChartBuilder chart2=DynamicReports.cht.bar3DChart()
-                    .setTitle("Item Quantity for"+mn).setCategory(TypeColumn).addSerie(DynamicReports.cht.serie(QtyColumn))
+
+            Bar3DChartBuilder chart2 = DynamicReports.cht.bar3DChart()
+                    .setTitle("Item Quantity for" + mn).setCategory(TypeColumn).addSerie(DynamicReports.cht.serie(QtyColumn))
                     .setUseSeriesAsCategory(true);;
             report1.summary(chart);
-           report1.summary(chart2);     
-           
-//             report.show(false);
-             report1.show(false);
-    }catch(Exception e){
-    
-    }
-    }
-    
-    
-    
-    
-    
-     public void generate3(){
-    String y=(String)jComboBox1.getSelectedItem();
-    String m=(String)jComboBox2.getSelectedItem();
-    int mm=Integer.parseInt(m);
-    String mn="";
-    String[] molist={"January","February","March","April","May","June","July","August","September","October","November","December"};
-    for(int i=1;i<13;i++){
-    if(mm==i){
-        mn=molist[i-1];
-    }
-    
-    }
-    
-    
-  String sql2="SELECT Item_Code,Type,Description,Unit_Price,Qty,Unit_limit from items";
-      
- 
-    try{
-      
-  
-       Statement st2=javaConnect.ConnectorDB();
+            report1.summary(chart2);
 
-        ResultSet rs2=st2.executeQuery(sql2);
-        
-    StyleBuilder boldStyle=DynamicReports.stl.style().bold();
-            StyleBuilder titleStyle=DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.CENTER).setFontSize(18);
-            StyleBuilder TableHeaderStyle=DynamicReports.stl.style(titleStyle).setBorder(
-            
-            DynamicReports.stl.pen1Point()
+//             report.show(false);
+            report1.show(false);
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void generate3() {
+        String y = (String) jComboBox1.getSelectedItem();
+        String m = (String) jComboBox2.getSelectedItem();
+        int mm = Integer.parseInt(m);
+        String mn = "";
+        String[] molist = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        for (int i = 1; i < 13; i++) {
+            if (mm == i) {
+                mn = molist[i - 1];
+            }
+
+        }
+
+        String sql2 = "SELECT Item_Code,Type,Description,Unit_Price,Qty,Unit_limit from items";
+
+        try {
+
+            Statement st2 = javaConnect.ConnectorDB();
+
+            ResultSet rs2 = st2.executeQuery(sql2);
+
+            StyleBuilder boldStyle = DynamicReports.stl.style().bold();
+            StyleBuilder titleStyle = DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.CENTER).setFontSize(18);
+            StyleBuilder TableHeaderStyle = DynamicReports.stl.style(titleStyle).setBorder(
+                    DynamicReports.stl.pen1Point()
             ).setBackgroundColor(Color.LIGHT_GRAY);
-            StyleBuilder boldRight=DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.RIGHT).setFontSize(15);
-            StyleBuilder boldLeft=DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.LEFT).setFontSize(15);
-             StyleBuilder boldCenter=DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.CENTER).setFontSize(15);
-            
-             StyleBuilder normalRight=DynamicReports.stl.style().setHorizontalAlignment(HorizontalAlignment.RIGHT).setFontSize(13);
-            StyleBuilder normalLeft=DynamicReports.stl.style().setHorizontalAlignment(HorizontalAlignment.LEFT).setFontSize(13);
-        
-            net.sf.dynamicreports.report.builder.component.TextFieldBuilder<String> title = DynamicReports.cmp.text("For Year : "+y+" Month : "+mn);
+            StyleBuilder boldRight = DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.RIGHT).setFontSize(15);
+            StyleBuilder boldLeft = DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.LEFT).setFontSize(15);
+            StyleBuilder boldCenter = DynamicReports.stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.CENTER).setFontSize(15);
+
+            StyleBuilder normalRight = DynamicReports.stl.style().setHorizontalAlignment(HorizontalAlignment.RIGHT).setFontSize(13);
+            StyleBuilder normalLeft = DynamicReports.stl.style().setHorizontalAlignment(HorizontalAlignment.LEFT).setFontSize(13);
+
+            net.sf.dynamicreports.report.builder.component.TextFieldBuilder<String> title = DynamicReports.cmp.text("For Year : " + y + " Month : " + mn);
             title.setStyle(titleStyle);
-      
+
             JasperReportBuilder report1 = DynamicReports.report();
             JasperReportBuilder report2 = DynamicReports.report();
-       InputStream stream1 =Bill.class.getResourceAsStream("/IMG/inventoryHeader.png");
-            ImageBuilder img2=DynamicReports.cmp.image(stream1).setFixedDimension(570, 210)
+            InputStream stream1 = Bill.class.getResourceAsStream("/IMG/inventoryHeader.png");
+            ImageBuilder img2 = DynamicReports.cmp.image(stream1).setFixedDimension(570, 210)
                     .setStyle(DynamicReports.stl.style().setHorizontalAlignment(HorizontalAlignment.CENTER));
-            
+
             report1.title(DynamicReports.cmp.horizontalFlowList(img2));
             report1.title(title);
-            report1.title(DynamicReports.cmp.text("Items sold in "+mn).setStyle(boldLeft));
-            
-            TextColumnBuilder<String> codeColumn=Columns.column("Code", "Item_Code",DynamicReports.type.stringType());
-            TextColumnBuilder<String> TypeColumn=Columns.column("Type", "Type",DynamicReports.type.stringType());
-            TextColumnBuilder<String> descColumn=Columns.column("Desc.", "Description",DynamicReports.type.stringType());
-            TextColumnBuilder<Integer> upColumn=Columns.column("Unit Price", "Unit_Price",DynamicReports.type.integerType());
-            TextColumnBuilder<Integer> QtyColumn=Columns.column("Qty", "Qty",DynamicReports.type.integerType());
-            TextColumnBuilder<Integer> limitColumn=Columns.column("Unit limit", "Unit_limit",DynamicReports.type.integerType());
-            
-            
-            TextColumnBuilder<Integer> rownumCol2=Columns.reportRowNumberColumn("  No  ").setFixedColumns(5).setHorizontalAlignment(HorizontalAlignment.CENTER);
+            report1.title(DynamicReports.cmp.text("Items sold in " + mn).setStyle(boldLeft));
+
+            TextColumnBuilder<String> codeColumn = Columns.column("Code", "Item_Code", DynamicReports.type.stringType());
+            TextColumnBuilder<String> TypeColumn = Columns.column("Type", "Type", DynamicReports.type.stringType());
+            TextColumnBuilder<String> descColumn = Columns.column("Desc.", "Description", DynamicReports.type.stringType());
+            TextColumnBuilder<Integer> upColumn = Columns.column("Unit Price", "Unit_Price", DynamicReports.type.integerType());
+            TextColumnBuilder<Integer> QtyColumn = Columns.column("Qty", "Qty", DynamicReports.type.integerType());
+            TextColumnBuilder<Integer> limitColumn = Columns.column("Unit limit", "Unit_limit", DynamicReports.type.integerType());
+
+            TextColumnBuilder<Integer> rownumCol2 = Columns.reportRowNumberColumn("  No  ").setFixedColumns(5).setHorizontalAlignment(HorizontalAlignment.CENTER);
             // report1.subtotalsAtSummary(DynamicReports.sbt.sum(ipriceColumn).setStyle(boldStyle));
-            report1.columns(rownumCol2,codeColumn,TypeColumn,descColumn,upColumn,QtyColumn,limitColumn);
-            
+            report1.columns(rownumCol2, codeColumn, TypeColumn, descColumn, upColumn, QtyColumn, limitColumn);
+
             report1.setColumnTitleStyle(TableHeaderStyle);
             report1.setDataSource(rs2);
             report1.highlightDetailEvenRows();
-            
-            
-            
-            Bar3DChartBuilder chart=DynamicReports.cht.bar3DChart()
+
+            Bar3DChartBuilder chart = DynamicReports.cht.bar3DChart()
                     .setTitle("Item Stock Quantities").setCategory(codeColumn).addSerie(DynamicReports.cht.serie(QtyColumn))
                     .setUseSeriesAsCategory(true);
-            
-     
+
             report1.summary(chart);
 //           report1.summary(chart2);     
-           
+
 //             report.show(false);
-             report1.show(false);
-    }catch(Exception e){
-    
+            report1.show(false);
+        } catch (Exception e) {
+
+        }
     }
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    public void setCombo(){
+
+    public void setCombo() {
         System.out.println(thisYear);
         Vector v1 = new Vector();
-        for(int ii=thisYear;ii>2009;ii--){
-        String  a =Integer.toString(ii);
-            
-         v1.add(a);
+        for (int ii = thisYear; ii > 2009; ii--) {
+            String a = Integer.toString(ii);
+
+            v1.add(a);
         }
-        
-         jComboBox1.setModel(new DefaultComboBoxModel(v1));
+
+        jComboBox1.setModel(new DefaultComboBoxModel(v1));
     }
-    
+
     /**
      * @param args the command line arguments
      */

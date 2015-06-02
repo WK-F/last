@@ -5,21 +5,26 @@
  */
 
 package final_project;
+import java.awt.Color;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+
 /**
  *
  * @author Hashen
  */
-public class Home extends javax.swing.JFrame {
+public class HomeEmp extends javax.swing.JFrame {
  int xMouse;
     int yMouse;
     /**
      * Creates new form Home
      */
     int timerun=1;
-    public Home() {
+    int pannleStat=0;
+    public HomeEmp() {
         initComponents();
+        this.setBackground(new Color(0, 255, 0, 0));
+        jPanel1.setVisible(false);
         this.setLocationRelativeTo(null);
         new Thread(){
         public void run(){
@@ -59,20 +64,23 @@ public class Home extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         Clock = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1040, 599));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/Actions-button-cancel-icon (1).png"))); // NOI18N
@@ -116,10 +124,6 @@ public class Home extends javax.swing.JFrame {
         Clock.setText("09:42:00 AM");
         getContentPane().add(Clock, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, 420, 90));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Common Tasks", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tekton Pro", 1, 18), new java.awt.Color(204, 0, 0))); // NOI18N
-        jPanel1.setOpaque(false);
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/Office-Customer-Male-Light-icon.png"))); // NOI18N
@@ -131,33 +135,7 @@ public class Home extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 180, 100));
-
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/dollar-icon.png"))); // NOI18N
-        jButton4.setText("Payments");
-        jButton4.setToolTipText("Payment Details + Generate Bills");
-        jButton4.setContentAreaFilled(false);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 180, 100));
-
-        jButton7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(255, 255, 255));
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/supply.png"))); // NOI18N
-        jButton7.setText("  Inventory");
-        jButton7.setToolTipText("Material deatils / Stock count");
-        jButton7.setContentAreaFilled(false);
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, 180, 100));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 150, 180, 100));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -170,71 +148,92 @@ public class Home extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 150, 100));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 150, 100));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 740, 120));
+        jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/dollar-icon.png"))); // NOI18N
+        jButton4.setText("Payments");
+        jButton4.setToolTipText("Payment Details + Generate Bills");
+        jButton4.setContentAreaFilled(false);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 180, 100));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Managerial Tasks", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tekton Pro", 1, 18), new java.awt.Color(204, 0, 0))); // NOI18N
-        jPanel2.setOpaque(false);
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jButton7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(255, 255, 255));
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/supply.png"))); // NOI18N
+        jButton7.setText("  Inventory");
+        jButton7.setToolTipText("Material deatils / Stock count");
+        jButton7.setContentAreaFilled(false);
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 460, -1, 100));
 
-        jButton5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/Preppy-icon.png"))); // NOI18N
-        jButton5.setText("Employee");
-        jButton5.setToolTipText("Employee Details");
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/Arrow-icon.png"))); // NOI18N
+        jButton5.setToolTipText("");
         jButton5.setContentAreaFilled(false);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 170, 100));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 290, -1, -1));
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/BACKIMG/home.png"))); // NOI18N
+        jLabel1.setOpaque(true);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/supply.png"))); // NOI18N
-        jButton6.setText("Supplier");
-        jButton6.setToolTipText("Supplier Details");
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/Office-Customer-Male-Light-icon.png"))); // NOI18N
+        jButton6.setToolTipText("Customer Orders");
         jButton6.setContentAreaFilled(false);
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 170, 100));
+        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 80, 90));
 
         jButton8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton8.setForeground(new java.awt.Color(255, 255, 255));
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/SEO-icon64.png"))); // NOI18N
-        jButton8.setText("Reports");
-        jButton8.setToolTipText("Generate Reports");
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/Text-Edit-icon.png"))); // NOI18N
+        jButton8.setToolTipText("Update the processing status of the order");
         jButton8.setContentAreaFilled(false);
+        jButton8.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/update 2.png"))); // NOI18N
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 40, -1, -1));
+        jPanel1.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
 
         jButton9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton9.setForeground(new java.awt.Color(255, 255, 255));
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/trash-mail-icon.png"))); // NOI18N
-        jButton9.setText("Deleted Orders");
-        jButton9.setToolTipText("View deleted Orders");
+        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/supply.png"))); // NOI18N
+        jButton9.setToolTipText("Material deatils");
         jButton9.setContentAreaFilled(false);
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 40, -1, -1));
+        jPanel1.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 100, 90));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 440, 740, 120));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/BACKIMG/homeExtended.png"))); // NOI18N
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 600));
 
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/BACKIMG/home.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, -1, 170, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -245,6 +244,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        // TODO add your handling code here:
         login lo=new login();
        lo.setVisible(true);
        this.dispose();
@@ -266,18 +266,8 @@ public class Home extends javax.swing.JFrame {
         bi.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-       Employee emp=new Employee();
-       emp.setVisible(true);
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        supply sup=new supply();
-        sup.setVisible(true);
-    }//GEN-LAST:event_jButton6ActionPerformed
-
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        mat_search ms=new mat_search();
+       mat_search ms=new mat_search();
        ms.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -294,14 +284,34 @@ public class Home extends javax.swing.JFrame {
         this.setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_jLabel3MouseDragged
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+       if(pannleStat==0){
+          jPanel1.setVisible(true);pannleStat=1;
+          
+          
+       }
+       else{
+           jPanel1.setVisible(false);pannleStat=0;
+          
+       }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+       custOrder co=new custOrder();
+       co.setVisible(true);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        SalesReports sr=new SalesReports();
-        sr.setVisible(true);
+      
+            Status sssss = new Status();
+            sssss.setVisible(true);
+       
+        
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        DeletedOrdersView dov=new DeletedOrdersView();
-        dov.setVisible(true);
+        Materials m=new Materials();
+        m.setVisible(true);
     }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
@@ -321,20 +331,21 @@ public class Home extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HomeEmp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HomeEmp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HomeEmp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HomeEmp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Home().setVisible(true);
+                new HomeEmp().setVisible(true);
             }
         });
     }
@@ -353,7 +364,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }

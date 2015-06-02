@@ -21,10 +21,12 @@ login lg=new login();
      * Creates new form loading
      */
     public loading() {
+        
         initComponents();
+        this.setLocationRelativeTo(null);
           AWTUtilities.setWindowOpaque(this, false);
        prog();
-       this.setLocationRelativeTo(null);
+       
     }
 
     /**
@@ -38,14 +40,18 @@ login lg=new login();
 
         jLabel1 = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JProgressBar();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/BACKIMG/loading.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
-        getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 460, 20));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/BACKIMG/load1.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
+        getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 600, 20));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/BACKIMG/ani.gif"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 150, 220));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -87,6 +93,7 @@ login lg=new login();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JProgressBar jProgressBar1;
     // End of variables declaration//GEN-END:variables
 
@@ -101,7 +108,7 @@ login lg=new login();
                      
                     try {
                         jProgressBar1.setValue(i);
-                        Thread.sleep(100);
+                        Thread.sleep(50);
                     } catch (InterruptedException ex) {
                                             }
                     

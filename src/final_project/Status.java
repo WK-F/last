@@ -27,6 +27,7 @@ public class Status extends javax.swing.JFrame {
     public Status(String a) {
         initComponents();
         jTextField1.setText(a);
+        this.setLocationRelativeTo(null);
         searchByOno();
         
     }

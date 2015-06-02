@@ -133,7 +133,7 @@ public class Employee extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Title");
+        jLabel6.setText("Job Title");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -168,7 +168,7 @@ public class Employee extends javax.swing.JFrame {
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Email");
+        jLabel13.setText("Password");
         getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, -1, -1));
 
         jTextField2.setToolTipText("Employee ID");
@@ -193,7 +193,7 @@ public class Employee extends javax.swing.JFrame {
         jTextField4.setToolTipText("address");
         getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 195, 150, 30));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mr.", "Miss.", "Mrs." }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Employee", "Manager" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -343,8 +343,9 @@ public class Employee extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if(jTextField2.getText().equals("")|| jTextField2.getText().length()<5)
              JOptionPane.showMessageDialog(this, "Employee ID is Invalid");
-        
-        else
+        else if(jTextField9.getText().equals(""))
+              JOptionPane.showMessageDialog(this, "Employee Password is Invalid");
+        else 
         insert();
      
 
@@ -611,7 +612,7 @@ cls();
         jXDatePicker2.setDate(y);
         }catch(Exception e){}
         
-        String z="Mr.";
+        String z="Employee.";
         jComboBox1.setSelectedItem(z);  
         
         

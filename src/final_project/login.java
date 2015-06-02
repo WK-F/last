@@ -6,6 +6,11 @@
 
 package final_project;
 
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Arrays;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Hashen
@@ -50,30 +55,35 @@ public class login extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Password");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 150, 30));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Employee", "Manager" }));
+        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 150, 30));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Type");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("User Name");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, -1, -1));
 
         jTextField1.setToolTipText("User Name");
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 150, 30));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 150, 30));
 
         jPasswordField1.setToolTipText("Password");
-        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 150, 30));
+        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, 150, 30));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/loginb.png"))); // NOI18N
         jLabel5.setToolTipText("Login");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 100, 70));
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 100, 70));
 
         jLabel6.setFont(new java.awt.Font("Tekton Pro", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -85,7 +95,7 @@ public class login extends javax.swing.JFrame {
                 jLabel6MouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 140, 50));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 280, 140, 50));
 
         jLabel7.setFont(new java.awt.Font("Tekton Pro", 1, 36)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -104,6 +114,57 @@ public class login extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jLabel6MouseClicked
 
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+       
+        if(jTextField1.getText().equals("")){
+              JOptionPane.showMessageDialog(this, "User name is empty");
+        }
+        else{
+        log();
+        }
+        
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    public void log(){
+        String ugui=jTextField1.getText();
+        String uType=(String)jComboBox1.getSelectedItem();
+        char[]  passgui=jPasswordField1.getPassword();
+        try{
+        String sql="Select Email from employee where NIC='"+ugui+"' AND Title='"+uType+"'";
+        Statement st=javaConnect.ConnectorDB();
+        ResultSet rs=st.executeQuery(sql);
+        String passdb="";
+        if(rs.next()){
+        passdb=rs.getString("Email");
+        
+        }else{
+        JOptionPane.showMessageDialog(this, "No such user");
+        }
+        
+        char[] passdbchar=passdb.toCharArray();
+        
+        if(Arrays.equals(passgui, passdbchar)){
+            
+            if(uType.equals("Manager")){
+            Home h=new Home();
+            h.setVisible(true);
+            this.setVisible(false);
+                
+            }else if(uType.equals("Employee")){
+            HomeEmp h=new HomeEmp();
+            h.setVisible(true);
+            this.setVisible(false);
+            }
+        
+        }else
+            JOptionPane.showMessageDialog(this, "Wrong password");
+        
+        }catch(Exception e){
+        JOptionPane.showMessageDialog(this, "An error occured");
+        }
+   
+    }
+    
     /**
      * @param args the command line arguments
      */

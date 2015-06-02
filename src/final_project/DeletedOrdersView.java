@@ -21,6 +21,7 @@ public class DeletedOrdersView extends javax.swing.JFrame {
      */
     public DeletedOrdersView() {
         initComponents();
+        this.setLocationRelativeTo(null);
         searchAll();
     }
 
@@ -107,7 +108,7 @@ public class DeletedOrdersView extends javax.swing.JFrame {
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
-        System.exit(0);
+       this.dispose();
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed

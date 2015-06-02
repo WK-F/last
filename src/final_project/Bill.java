@@ -441,8 +441,8 @@ public class Bill extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
-        if (emailadd.equals("")) {
-            JOptionPane.showMessageDialog(null, "Customer dosen't have any e-Mail address ");
+        if (!jTextField6.getText().equals("COMPLETED")) {
+            JOptionPane.showMessageDialog(null, "Order is not complete yet");
         } else {
 
             sendMail();
@@ -777,8 +777,10 @@ public class Bill extends javax.swing.JFrame {
             if (emailadd.equals("")) {
 
                 jButton4.setEnabled(false);
+                jButton4.setToolTipText("Customer dosen't have any e-Mail address ");
             } else {
                 jButton4.setEnabled(true);
+                jButton4.setToolTipText("Send completeion notice to customer");
             }
 
         } catch (Exception e) {
