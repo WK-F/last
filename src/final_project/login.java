@@ -147,13 +147,14 @@ public class login extends javax.swing.JFrame {
             
             if(uType.equals("Manager")){
             Home h=new Home();
-            h.setVisible(true);
+            //h.setVisible(true);
             this.setVisible(false);
-                
+            h.setVisible(true);    
             }else if(uType.equals("Employee")){
             HomeEmp h=new HomeEmp();
-            h.setVisible(true);
+            //h.setVisible(true);
             this.setVisible(false);
+            h.setVisible(true);
             }
         
         }else

@@ -40,6 +40,7 @@ public class Order extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         try {
+            getLostImage();
             noImg();
             jTextField2.setText("0");
             jTextField6.setText("0");
@@ -48,10 +49,12 @@ public class Order extends javax.swing.JFrame {
 
         }
     }
+
     public Order(String bb) {
         initComponents();
         this.setLocationRelativeTo(null);
         try {
+            getLostImage();
             noImg();
             jTextField2.setText("0");
             jTextField6.setText("0");
@@ -966,19 +969,18 @@ public class Order extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        
-        String gg= jTextField3.getText();
-        if(gg.equalsIgnoreCase("")){
-            custOrder co=new custOrder();
+
+        String gg = jTextField3.getText();
+        if (gg.equalsIgnoreCase("")) {
+            custOrder co = new custOrder();
+            co.setVisible(true);
+            this.dispose();
+        } else {
+            custOrder co = new custOrder(gg);
             co.setVisible(true);
             this.dispose();
         }
-        else{
-        custOrder co=new custOrder(gg);
-        co.setVisible(true);
-        this.dispose();
-        }
-        
+
     }//GEN-LAST:event_jButton11ActionPerformed
 
     /**
@@ -1103,9 +1105,17 @@ public class Order extends javax.swing.JFrame {
 
     }
 
+    public void getLostImage() {
+        try {
+             format1 = new ImageIcon(getClass().getResource("/IMG/Lost.jpg"));
+        } catch (Exception e) {
+        }
+    }
+
     public void noImg() {
         try {
-            ImageIcon format = new ImageIcon(getClass().getResource("/IMG/Lost.jpg"));
+            
+            ImageIcon format = format1;
             jLabel8.setIcon(format);
             // pib=format.toString().getBytes();
             //pib=format.getClass().getResource("/IMG/Lost.jpg").getFile();
@@ -1437,6 +1447,7 @@ public class Order extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private ImageIcon format = null;
+    private ImageIcon format1 = null;
     String filename = null;
     int s = 0;
     byte[] pib = null;
