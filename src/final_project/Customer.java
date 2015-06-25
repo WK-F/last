@@ -7,6 +7,7 @@ package final_project;
 
 import java.awt.Color;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Vector;
@@ -73,6 +74,14 @@ public class Customer extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(688, 487));
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(688, 520));
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JFrameKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                formKeyReleased(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton5.setBackground(new Color(0, 0, 0, 0));
@@ -102,6 +111,11 @@ public class Customer extends javax.swing.JFrame {
                 jLabel11MousePressed(evt);
             }
         });
+        jLabel11.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel11KeyPressed(evt);
+            }
+        });
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 30));
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 3, 36)); // NOI18N
@@ -115,6 +129,11 @@ public class Customer extends javax.swing.JFrame {
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 385, -1, 30));
 
         jTextField1.setToolTipText("Email address");
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
+        });
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 385, 180, 30));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -164,6 +183,9 @@ public class Customer extends javax.swing.JFrame {
 
         jTextField3.setToolTipText("Name");
         jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField3KeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField3KeyReleased(evt);
             }
@@ -203,12 +225,18 @@ public class Customer extends javax.swing.JFrame {
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 330, -1, 30));
 
         jTextField5.setToolTipText("Address");
+        jTextField5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField5KeyPressed(evt);
+            }
+        });
         getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, 180, 30));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/delete 1.png"))); // NOI18N
         jButton1.setText("Delete");
+        jButton1.setToolTipText("(Delete)");
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/delete 2.png"))); // NOI18N
@@ -223,6 +251,7 @@ public class Customer extends javax.swing.JFrame {
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/save 1.png"))); // NOI18N
         jButton2.setText("Save");
+        jButton2.setToolTipText("(Insert)");
         jButton2.setContentAreaFilled(false);
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/save 2.png"))); // NOI18N
@@ -237,6 +266,7 @@ public class Customer extends javax.swing.JFrame {
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/update a.png"))); // NOI18N
         jButton3.setText("Update");
+        jButton3.setToolTipText("(Page Up)");
         jButton3.setContentAreaFilled(false);
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton3.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/update 2.png"))); // NOI18N
@@ -251,6 +281,7 @@ public class Customer extends javax.swing.JFrame {
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/clear1.png"))); // NOI18N
         jButton4.setText("Clear");
+        jButton4.setToolTipText("(F5)");
         jButton4.setContentAreaFilled(false);
         jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton4.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/clear2.png"))); // NOI18N
@@ -268,6 +299,11 @@ public class Customer extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/BACKIMG/cus.png"))); // NOI18N
         jLabel2.setToolTipText("");
+        jLabel2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel2KeyPressed(evt);
+            }
+        });
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 688, 520));
 
         pack();
@@ -339,16 +375,30 @@ public class Customer extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField3KeyTyped
 
     private void jTextField2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyPressed
-        if (jTextField2.getText().length() == 9) {
 
-            jTextField3.grabFocus();
-
-        } else {
+        if (evt.getKeyCode() == KeyEvent.VK_INSERT) {
+            vlidateInsert();
+        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
+            validateUpdate();
+        } else if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
+            validateDelete();
+        } else if (evt.getKeyCode() == KeyEvent.VK_F5) {
+            cls();
         }
+
+
     }//GEN-LAST:event_jTextField2KeyPressed
 
     private void jTextField4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyPressed
-
+        if (evt.getKeyCode() == KeyEvent.VK_INSERT) {
+            vlidateInsert();
+        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
+            validateUpdate();
+        } else if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
+            validateDelete();
+        } else if (evt.getKeyCode() == KeyEvent.VK_F5) {
+            cls();
+        }
     }//GEN-LAST:event_jTextField4KeyPressed
 
 
@@ -367,72 +417,24 @@ public class Customer extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        jTextField1.setText("");
-        jTextField2.setText("");
-        jTextField3.setText("");
-        jTextField4.setText("");
-        jTextField5.setText("");
+        cls();
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        if (jTextField2.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Customer NIC is Empty");
-        } else {
-            if (jTextField3.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Name is Empty");
-            } else {
-                if (jTextField4.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "Telephone no is Empty");
-                } else {
-                    insert();
-
-                }
-            }
-        }
+        vlidateInsert();
 
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (jTextField2.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Customer NIC is Empty");
-        } else {
-            if (jTextField3.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Name is Empty");
-            } else {
-                if (jTextField4.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "Telephone no is Empty");
-                } else {
-                    update();
-
-                }
-            }
-        }
+        validateUpdate();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        validateDelete();
 
-        String a = jTextField2.getText();
-        int dr = JOptionPane.showConfirmDialog(null, "Are You Sure You Want to Delete The Record?");
-        if (dr == JOptionPane.YES_OPTION) {
-
-            try {
-                Statement st = javaConnect.ConnectorDB();
-                st.executeUpdate("delete from customer where NIC='" + a + "' ");
-                JOptionPane.showMessageDialog(this, "Customer Deleted");
-                jTextField1.setText("");
-                jTextField2.setText("");
-                jTextField3.setText("");
-                jTextField4.setText("");
-                jTextField5.setText("");
-
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e);
-            }
-
-        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -489,6 +491,75 @@ public class Customer extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void JFrameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JFrameKeyPressed
+
+
+    }//GEN-LAST:event_JFrameKeyPressed
+
+    private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+
+    }//GEN-LAST:event_formKeyReleased
+
+    private void jTextField3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_INSERT) {
+            vlidateInsert();
+        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
+            validateUpdate();
+        } else if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
+            validateDelete();
+        } else if (evt.getKeyCode() == KeyEvent.VK_F5) {
+            cls();
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3KeyPressed
+
+    private void jTextField5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_INSERT) {
+            vlidateInsert();
+        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
+            validateUpdate();
+        } else if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
+            validateDelete();
+        } else if (evt.getKeyCode() == KeyEvent.VK_F5) {
+            cls();
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_jTextField5KeyPressed
+
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_INSERT) {
+            vlidateInsert();
+        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
+            validateUpdate();
+        } else if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
+            validateDelete();
+        } else if (evt.getKeyCode() == KeyEvent.VK_F5) {
+            cls();
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1KeyPressed
+
+    private void jLabel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel2KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_INSERT) {
+            vlidateInsert();
+        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
+            validateUpdate();
+        } else if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
+            validateDelete();
+        } else if (evt.getKeyCode() == KeyEvent.VK_F5) {
+            cls();
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_jLabel2KeyPressed
+
+    private void jLabel11KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel11KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_INSERT) {
+            vlidateInsert();
+        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
+            validateUpdate();
+        } else if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
+            validateDelete();
+        } else if (evt.getKeyCode() == KeyEvent.VK_F5) {
+            cls();
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_jLabel11KeyPressed
 
     final Point point = new Point(0, 0);
 
@@ -607,6 +678,80 @@ public class Customer extends javax.swing.JFrame {
         }
     }
 
+    public void delete() {
+        String a = jTextField2.getText();
+        int dr = JOptionPane.showConfirmDialog(null, "Are You Sure You Want to Delete The Record?");
+        if (dr == JOptionPane.YES_OPTION) {
+
+            try {
+                Statement st = javaConnect.ConnectorDB();
+                st.executeUpdate("delete from customer where NIC='" + a + "' ");
+                JOptionPane.showMessageDialog(this, "Customer Deleted");
+                jTextField1.setText("");
+                jTextField2.setText("");
+                jTextField3.setText("");
+                jTextField4.setText("");
+                jTextField5.setText("");
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+
+        }
+    }
+
+    public void vlidateInsert() {
+        if (jTextField2.getText().isEmpty() || jTextField2.getText().length() != 10) {
+            JOptionPane.showMessageDialog(this, "Customer NIC is Invalid");
+        } else {
+            if (jTextField3.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Name is Empty");
+            } else {
+                if (jTextField4.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Telephone no is Empty");
+                } else {
+                    insert();
+
+                }
+            }
+        }
+
+    }
+
+    public void validateUpdate() {
+        if (jTextField2.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Customer NIC is Empty");
+        } else {
+            if (jTextField3.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Name is Empty");
+            } else {
+                if (jTextField4.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Telephone no is Empty");
+                } else {
+                    update();
+
+                }
+            }
+        }
+
+    }
+
+    public void cls() {
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
+    }
+
+    public void validateDelete() {
+        if (jTextField2.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Customer NIC is Empty");
+        } else {
+            delete();
+
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

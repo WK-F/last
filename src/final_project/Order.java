@@ -596,7 +596,7 @@ public class Order extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (jTextField1.getText().isEmpty() || jTextField1.getText().length() < 5) {
             JOptionPane.showMessageDialog(this, "Order No is Invalid");
-        } else if (jTextField3.getText().isEmpty() || jTextField3.getText().length() < 10) {
+        } else if (jTextField3.getText().isEmpty() || jTextField3.getText().length() != 10) {
             JOptionPane.showMessageDialog(this, "Customer NIC is Invalid");
         } else if (jTextArea3.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Description is Empty");

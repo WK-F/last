@@ -68,7 +68,8 @@ public class custOrder extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Tekton Pro Cond", 1, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("                                                            Status");
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel9.setText("                                                       Customer Orders");
         jLabel9.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jLabel9MouseDragged(evt);

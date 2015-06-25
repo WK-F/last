@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package final_project;
+
 import java.awt.Color;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -14,41 +14,42 @@ import java.util.GregorianCalendar;
  * @author Hashen
  */
 public class HomeEmp extends javax.swing.JFrame {
- int xMouse;
+
+    int xMouse;
     int yMouse;
     /**
      * Creates new form Home
      */
-    int timerun=1;
-    int pannleStat=0;
+    int timerun = 1;
+    int pannleStat = 0;
+
     public HomeEmp() {
         initComponents();
         this.setBackground(new Color(0, 255, 0, 0));
         jPanel1.setVisible(false);
         this.setLocationRelativeTo(null);
-        new Thread(){
-        public void run(){
-            while(timerun==1){
-            Calendar cal=new GregorianCalendar();
-            int hour=cal.get(Calendar.HOUR);
-            int min=cal.get(Calendar.MINUTE);
-            int sec=cal.get(Calendar.SECOND);
-            int AM_PM=cal.get(Calendar.AM_PM);
-            String day_night="";
-            if(AM_PM==1){
-            day_night="PM";
+        new Thread() {
+            public void run() {
+                while (timerun == 1) {
+                    Calendar cal = new GregorianCalendar();
+                    int hour = cal.get(Calendar.HOUR);
+                    int min = cal.get(Calendar.MINUTE);
+                    int sec = cal.get(Calendar.SECOND);
+                    int AM_PM = cal.get(Calendar.AM_PM);
+                    String day_night = "";
+                    if (AM_PM == 1) {
+                        day_night = "PM";
+                    } else {
+                        day_night = "AM";
+                    }
+                    String time = hour + ":" + min + ":" + sec + " " + day_night;
+                    Clock.setText(time);
+
+                }
+
             }
-        else{
-            day_night="AM";
-            }
-            String time=hour+":"+min+":"+sec+" "+day_night;
-            Clock.setText(time);
-            
-            }
-            
-        }
         }.start();
-        
+
     }
 
     /**
@@ -68,6 +69,7 @@ public class HomeEmp extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -176,6 +178,18 @@ public class HomeEmp extends javax.swing.JFrame {
         });
         getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 460, -1, 100));
 
+        jButton10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton10.setForeground(new java.awt.Color(255, 255, 255));
+        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/FAQ-icon32.png"))); // NOI18N
+        jButton10.setText("Help");
+        jButton10.setContentAreaFilled(false);
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, -1, -1));
+
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/Arrow-icon.png"))); // NOI18N
         jButton5.setToolTipText("");
         jButton5.setContentAreaFilled(false);
@@ -239,80 +253,89 @@ public class HomeEmp extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Order od=new Order();
+        Order od = new Order();
         od.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
-        login lo=new login();
-       lo.setVisible(true);
-       this.dispose();
+        login lo = new login();
+        lo.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Customer cus=new Customer();
+        Customer cus = new Customer();
         cus.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       login lo=new login();
-       lo.setVisible(true);
-       this.dispose();
+        login lo = new login();
+        lo.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        Bill bi=new Bill();
+        Bill bi = new Bill();
         bi.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-       mat_search ms=new mat_search();
-       ms.setVisible(true);
+        mat_search ms = new mat_search();
+        ms.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
         // TODO add your handling code here:
-         xMouse = evt.getX();
+        xMouse = evt.getX();
         yMouse = evt.getY();
     }//GEN-LAST:event_jLabel3MousePressed
 
     private void jLabel3MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseDragged
         // TODO add your handling code here:
-          int x = evt.getXOnScreen();
+        int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
         this.setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_jLabel3MouseDragged
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-       if(pannleStat==0){
-          jPanel1.setVisible(true);pannleStat=1;
-          
-          
-       }
-       else{
-           jPanel1.setVisible(false);pannleStat=0;
-          
-       }
+        if (pannleStat == 0) {
+            jPanel1.setVisible(true);
+            pannleStat = 1;
+
+        } else {
+            jPanel1.setVisible(false);
+            pannleStat = 0;
+
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-       custOrder co=new custOrder();
-       co.setVisible(true);
+        custOrder co = new custOrder();
+        co.setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-      
-            Status sssss = new Status();
-            sssss.setVisible(true);
-       
-        
+
+        Status sssss = new Status();
+        sssss.setVisible(true);
+
+
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        Materials m=new Materials();
+        Materials m = new Materials();
         m.setVisible(true);
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        try {
+            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler "+"C:\\temp\\Help.pdf");
+            
+        } catch (Exception e) {
+        }
+
+    }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -353,6 +376,7 @@ public class HomeEmp extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Clock;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

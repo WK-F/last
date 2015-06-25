@@ -73,7 +73,7 @@ int xMouse;
 
         jLabel3.setFont(new java.awt.Font("Tekton Pro", 3, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("                                                                  Supplyers");
+        jLabel3.setText("                                                                  Supplier ");
         jLabel3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jLabel3MouseDragged(evt);
@@ -102,7 +102,7 @@ int xMouse;
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Supply ID");
+        jLabel5.setText("Supplier ID");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, 30));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -123,7 +123,7 @@ int xMouse;
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("E mail");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, -1, -1));
 
         jTextField1.setToolTipText("Email address");
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 160, 30));
